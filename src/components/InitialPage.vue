@@ -1,19 +1,19 @@
 <template>
-  <div class="main-container">
-  <div class="left-container">
+  <main class="main-container">
+  <section class="left-container">
     <div class="text">
     <h1 class="title">CookBook</h1>
       <h2 class="subtitle">Cook que é bom nada...</h2>
     </div>
-  </div>
-  <div class="right-container">
+  </section>
+  <section class="right-container">
     <router-link to="/home">
       <button class="next" @click="goToPage('/home')">
        Avançar
       </button>
     </router-link>
-  </div> 
-</div> 
+  </section> 
+</main> 
 </template>
   
 <script>
@@ -35,7 +35,7 @@ body{
   padding: 0;
   width: 100vw;
   height: 100vh;
-  font-family: 'Josefin Slab', serif;
+  font-family: 'Jost';
 }
 
 .main-container{

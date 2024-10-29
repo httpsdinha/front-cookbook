@@ -35,10 +35,33 @@
       </select>
     </div>
   </nav>
-  <main></main>
+  <main>
+    <section>
+      <article class="recipe">
+        <img src="../assets/icone.jpg" alt="fotoreceita" class="fotoreceita">
+        <section class="recipe-details">
+          <h2>Nome Receita</h2>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipisci elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua. 
+          </p>
+          <button class="ver" @click="goToPage('/id')">
+          Ver
+          </button>
+       </section>
+      </article>
+    </section>
+  </main>
 </template>
 
 <script>
+export default {
+  name: "HomePage",
+  methods: {
+    goToPage(route) {
+      this.$router.push(route);
+    },
+  },
+};
 </script>
 
 <style>
@@ -139,5 +162,77 @@ nav{
   background-repeat: no-repeat;
   cursor: pointer;
   pointer-events: none;
+}
+article{
+  background-color: #fff;
+  border-radius: 0.3125rem;
+  margin-top: 1.25rem;
+  margin-left: 8rem;
+  width: 31.625rem;
+  height: 11.5625rem;
+  flex-shrink: 0;
+}
+
+.ver {
+  cursor: pointer;
+  width: 4rem;
+  height: 1.75rem;
+  flex-shrink: 0;
+  border-radius: 0.3125rem;
+  border: none;
+  background: linear-gradient(90deg, #A12A09 0%, #940D0D 100%);
+  color: #FFF;
+  font-family: 'Jost';
+  font-size: 0.9375rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  margin-left: auto; 
+  margin-bottom: 1rem;
+}
+
+.ver:hover{
+  background: #A12A09;
+}
+
+.fotoreceita{
+  width: 9.375rem;
+  height: 9.375rem;
+  flex-shrink: 0;
+  margin: 1rem;
+}
+
+.recipe{
+  display:flex;
+  align-items: center;
+}
+
+.recipe-details{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin-top: 10px;
+}
+
+.recipe-details h2{
+  color: #000;
+  font-family: Jura;
+  font-size: 1.5rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  margin-bottom: 0.5rem;
+  margin-top: 1rem;
+}
+
+p{
+  color: #000;
+  font-family: Jura;
+  font-size: 0.9375rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  width: 17.875rem;
+  margin-top: 0;
 }
 </style>

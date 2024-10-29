@@ -1,7 +1,7 @@
 <template>
   <header>
-    <h1>CookBook</h1>
-    <aside class="Search">
+    <h1 @click="goToPage('/')">CookBook</h1>
+    <aside class="Search responsive-search">
       <input type="text" class="Search-Input" placeholder="Pesquisar" />
       <img class="Search-Icon" src="../assets/procurar.png" alt="Search Icon" />
     </aside>
@@ -39,15 +39,13 @@
     </button>
   </nav>
   <main>
-    <section>
-      <article class="recipe">
-        <img src="../assets/icone.jpg" alt="fotoreceita" class="fotoreceita">
+    <section class="recipes-container">
+      <article v-for="recipe in recipes" :key="recipe.id" class="recipe">
+        <img :src="recipe.image" alt="fotoreceita" class="fotoreceita">
         <section class="recipe-details">
-          <h2>Nome Receita</h2>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipisci elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua. 
-          </p>
-          <button class="ver" @click="goToPage('/id')">
+          <h2>{{ recipe.name }}</h2>
+          <p>{{ recipe.description }} </p>
+          <button class="ver" @click="goToPage(`/id/${recipes.id}`)">
           Ver
           </button>
        </section>
@@ -57,8 +55,14 @@
 </template>
 
 <script>
+import recipes from '../test/recipes.json';
 export default {
   name: "HomePage",
+  data(){
+    return {
+      recipes: recipes,
+    };
+  },
   methods: {
     goToPage(route) {
       this.$router.push(route);
@@ -70,13 +74,15 @@ export default {
 <style>
 body {
   background-color: #d9d9d9;
+  overflow: auto;
 }
 
 header {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  padding: 10px 20px;
+  padding: 1rem;
+  text-align: center;
   background: linear-gradient(270deg, #a12a09 -0.82%, #940d0d 98.56%);
   color: white;
 }
@@ -89,23 +95,35 @@ h1 {
   font-style: normal;
   font-weight: 400;
   line-height: normal;
+  cursor: pointer;
 }
 
 .Search {
-  margin: 0 auto;
-  margin-right: 25%;
+  margin: auto;
+  margin-left: 10%;
   position: relative;
   display: inline-block;
+  width: 100%;
+  
+}
+
+.responsive-search {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  
 }
 
 .Search-Input {
+  flex: 1;
   padding-left: 30px;
   border-radius: 0.3125rem;
   background: #d9d9d9;
   border: none;
-  width: 39.4375rem;
+  width: 100%; 
+  max-width: 39.4375rem; 
   height: 1.6875rem;
-  flex-shrink: 0;
+  
 }
 
 .Search-Icon {
@@ -171,8 +189,9 @@ article{
   border-radius: 0.3125rem;
   margin-top: 1.25rem;
   margin-left: 8rem;
-  width: 31.625rem;
-  height: 11.5625rem;
+  width: 100%;
+  max-width: 31.625rem;
+  height: auto;
   flex-shrink: 0;
 }
 
@@ -182,18 +201,19 @@ article{
   border-radius: 0.3125rem;
   border: none;
   color: #FFF;
-  width: 7.0625rem;
+  width: 100%;
+  max-width: 7.0625rem;
   height: 1.5625rem;
   float: right;
   margin-right: 7.38rem;
   cursor: pointer;
+  margin-top: 0.6rem;
 }
 
 .ver {
   cursor: pointer;
   width: 4rem;
   height: 1.75rem;
-  flex-shrink: 0;
   border-radius: 0.3125rem;
   border: none;
   background: linear-gradient(90deg, #A12A09 0%, #940D0D 100%);
@@ -202,9 +222,10 @@ article{
   font-size: 0.9375rem;
   font-style: normal;
   font-weight: 400;
-  line-height: normal;
-  margin-left: auto; 
-  margin-bottom: 1rem;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  margin: 1rem; 
 }
 
 .ver:hover, .adicionar:hover{
@@ -219,15 +240,40 @@ article{
 }
 
 .recipe{
-  display:flex;
-  align-items: center;
+  display: flex;
+  width: calc(100% - 0.5rem); 
+  box-sizing: border-box;
+  margin: 3rem;
+  position: relative;
 }
 
-.recipe-details{
+.recipes-container {
   display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  margin-top: 10px;
+  justify-content: center;
+  flex-wrap: wrap; 
+  margin: 0 auto; 
+  max-width: 100%; 
+  overflow: hidden; 
+}
+
+
+p {
+  color: #000;
+  font-family: Jura;
+  font-size: 0.9375rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  width: 100%; /* Ajusta a largura para 100% do contêiner */
+  max-width: 17.875rem; /* Define uma largura máxima */
+  margin-top: 0;
+  word-wrap: break-word; 
+  overflow-wrap: break-word; /* Permite quebra de palavras */
+}
+.recipe-details {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
 }
 
 .recipe-details h2{
@@ -241,14 +287,50 @@ article{
   margin-top: 1rem;
 }
 
-p{
+p {
   color: #000;
   font-family: Jura;
   font-size: 0.9375rem;
   font-style: normal;
   font-weight: 600;
   line-height: normal;
-  width: 17.875rem;
+  width: 100%; 
+  max-width: 17.875rem; 
   margin-top: 0;
+  word-wrap: break-word; 
+  overflow-wrap: break-word; 
+}
+
+
+@media (max-width: 600px) {
+  .responsive-search {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .Search-Input {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  .Search-Icon {
+    align-self: center;
+  }
+
+  .recipe {
+    width: calc(100% - 0.5rem); /* 1 item por linha */
+  }
+}
+
+@media (max-width: 1200px) {
+  .recipe {
+    width: calc(33.33% - 0.5rem); /* 3 items por linha */
+  }
+}
+
+@media (max-width: 900px) {
+  .recipe {
+    width: calc(50% - 0.5rem); /* 2 items por linha */
+  }
 }
 </style>

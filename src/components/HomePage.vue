@@ -34,6 +34,9 @@
         <option value="3">+6 pessoas</option>
       </select>
     </div>
+    <button class="adicionar" @click="goToPage('/adicionar')">
+          Adicionar
+    </button>
   </nav>
   <main>
     <section>
@@ -173,6 +176,19 @@ article{
   flex-shrink: 0;
 }
 
+.adicionar{
+  background: linear-gradient(90deg, #A12A09 0%, #940D0D 100%);
+  font-family: 'Jost';
+  border-radius: 0.3125rem;
+  border: none;
+  color: #FFF;
+  width: 7.0625rem;
+  height: 1.5625rem;
+  float: right;
+  margin-right: 7.38rem;
+  cursor: pointer;
+}
+
 .ver {
   cursor: pointer;
   width: 4rem;
@@ -191,7 +207,7 @@ article{
   margin-bottom: 1rem;
 }
 
-.ver:hover{
+.ver:hover, .adicionar:hover{
   background: #A12A09;
 }
 

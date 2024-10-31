@@ -1,46 +1,46 @@
 <template>
-    <header>
+  <header>
     <h1 @click="goToPage('/')">CookBook</h1>
-    <aside class="Search responsive-search">
-      <input type="text" class="Search-Input" placeholder="Pesquisar" />
-      <img class="Search-Icon" src="../assets/procurar.png" alt="Search Icon" />
+    <aside class="home-search responsive-search">
+      <input type="text" class="home-search-input" placeholder="Pesquisar" />
+      <img class="home-search-icon" src="../assets/procurar.png" alt="Search Icon" />
     </aside>
   </header>
   <main class="main-container">
-    <section class="form-container">
+    <section class="add-form-container">
         <h2>Adicionar Receita</h2>
         <form>
             <label for="name">Nome da Receita</label>
-            <input type="text" id="input-name" class="input-nome"/>
+            <input type="text" id="input-name" class="add-input-nome"/>
             
             <label for="ingrediente">Ingredientes</label>
-            <input type="text" id="input-ingrediente" class="input-ingrediente"/>
+            <input type="text" id="input-ingrediente" class="add-input-ingrediente"/>
             
             <label for="preparo">Modo de Preparo</label>
-            <input type="text" id="input-preparo" class="input-preparo"/>
+            <input type="text" id="input-preparo" class="add-input-preparo"/>
 
-            <nav class="filtersall">
-                <div class="select-container">
-                <img src="../assets/saco-de-dolar.png" alt="Valor Icon" class="select-icon" /> 
-                <select class="filters" ref="customSelect">
+            <nav class="add-filtersall">
+                <div class="add-select-container">
+                <img src="../assets/saco-de-dolar.png" alt="Valor Icon" class="add-select-icon" /> 
+                <select class="add-filters" ref="customSelect">
                     <option value="0">Valor</option>
                     <option value="1">Alto</option>
                     <option value="2">Médio</option>
                     <option value="3">Baixo</option>
                 </select>
                 </div>
-                <div class="select-container">
-                <img src="../assets/relogio-tres.png" alt="Tempo Icon" class="select-icon" /> 
-                <select class="filters">
+                <div class="add-select-container">
+                <img src="../assets/relogio-tres.png" alt="Tempo Icon" class="add-select-icon" /> 
+                <select class="add-filters">
                     <option value="0">Tempo</option>
                     <option value="1">10-30min</option>
                     <option value="2">30-60min</option>
                     <option value="3">+60min</option>
                 </select>
                 </div>
-                <div class="select-container">
-                <img src="../assets/restaurante.png" alt="Serve Icon" class="select-icon" /> 
-                <select class="filters">
+                <div class="add-select-container">
+                <img src="../assets/restaurante.png" alt="Serve Icon" class="add-select-icon" /> 
+                <select class="add-filters">
                     <option value="0">Serve</option>
                     <option value="1">1-2 pessoas</option>
                     <option value="2">3-5 pessoas</option>
@@ -48,7 +48,7 @@
                 </select>
                 </div>
             </nav>
-            <button type="submit" class="button-adicionar">Adicionar</button>
+            <button type="submit" class="add-button-adicionar">Adicionar</button>
         </form>
     </section>
   </main>
@@ -73,7 +73,7 @@ export default {
     height: 100vh; 
 }
 
-.form-container {
+.add-form-container {
     display: flex; 
     flex-direction: column; 
     align-items: center; 
@@ -105,24 +105,24 @@ h2 {
     font-family: "Jost";
 }
 
-.input-nome, .input-ingrediente, .input-preparo {
+.add-input-nome, .add-input-ingrediente, .add-input-preparo {
     border-radius: 0.3125rem;
     background: #D9D9D9;
     border: none;
     margin-bottom: 1rem;
 }
 
-.input-nome{
+.add-input-nome{
     width: 100%; 
     height: 1.6875rem;
 }
 
-.input-preparo, .input-ingrediente {
+.add-input-preparo, .add-input-ingrediente {
     width: 100%; 
     height: 5.9375rem;
 }
 
-.button-adicionar{
+.add-button-adicionar{
     border-radius: 0.3125rem;
     background: linear-gradient(
         90deg, 
@@ -140,7 +140,7 @@ h2 {
     cursor: pointer;
 }
 
-.filtersall {
+.add-filtersall {
     align-self: flex-start; 
     width: 100%; 
     display: flex; 
@@ -149,12 +149,12 @@ h2 {
     gap: 1rem; 
 }
 
-.select-container {
+.add-select-container {
     align-self: flex-start;
     width: 8rem; 
 }
 
-.filters{
+.add-filters{
     background: #D9D9D9;
     margin: 0;
     width: 100%; 
@@ -164,7 +164,63 @@ input{
     padding-left: 0.5rem; 
 }
 
-.select-icon{
+.add-select-icon{
     margin: 0;
+}
+
+header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  text-align: center;
+  background: linear-gradient(270deg, #a12a09 -0.82%, #940d0d 98.56%);
+  color: white;
+}
+
+h1 {
+  margin-left: 7.12rem;
+  color: #fff;
+  font-family: 'Jost';
+  font-size: 2rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  cursor: pointer;
+}
+
+.home-search {
+  margin: auto;
+  margin-left: 10%;
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+
+.responsive-search {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.home-search-input {
+  flex: 1;
+  padding-left: 30px;
+  border-radius: 0.3125rem;
+  background: #d9d9d9;
+  border: none;
+  width: 100%;
+  max-width: 39.4375rem;
+  height: 1.6875rem;
+}
+
+.home-search-icon {
+  cursor: pointer;
+  position: absolute;
+  left: 5px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 15px;
+  height: 15px;
 }
 </style>

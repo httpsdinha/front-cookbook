@@ -45,7 +45,7 @@
         <section class="recipe-details">
           <h2>{{ recipe.name }}</h2>
           <p>{{ recipe.description }} </p>
-          <button class="ver" @click="goToPage(`/id/${recipes.id}`)">
+          <button class="ver" @click="goToPage(`/id/${recipe.id}`)">
           Ver
           </button>
        </section>
@@ -56,16 +56,17 @@
 
 <script>
 import recipes from '../test/recipes.json';
+
 export default {
   name: "HomePage",
   data(){
-    return {
-      recipes: recipes,
+    return { 
+      recipes,
     };
   },
   methods: {
-    goToPage(route) {
-      this.$router.push(route);
+    goToPage(url) {
+      this.$router.push(url);
     },
   },
 };
@@ -243,7 +244,8 @@ article{
   display: flex;
   width: calc(100% - 0.5rem); 
   box-sizing: border-box;
-  margin: 3rem;
+  margin: 2.5rem;
+  margin-bottom: 0rem;
   position: relative;
 }
 

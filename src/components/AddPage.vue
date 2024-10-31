@@ -141,31 +141,56 @@ h2 {
 }
 
 .add-filtersall {
-    align-self: flex-start; 
-    width: 100%; 
-    display: flex; 
-    flex-direction: row; 
-    margin: 0;
-    gap: 1rem; 
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
 }
 
 .add-select-container {
-    align-self: flex-start;
-    width: 8rem; 
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.add-select-icon {
+  position: absolute;
+  left: 10px;
+  width: 16px;
+  height: 16px;
+  pointer-events: none; 
 }
 
 .add-filters{
+    font-family: 'Jura';
+    width: 7.0625rem;
+    height: 1.5625rem;
+    padding-left: 35px; 
+    border-radius: 0.3125rem;
     background: #D9D9D9;
-    margin: 0;
-    width: 100%; 
+    border: none;
+    appearance: none;
+    -webkit-appearance: none;
+    cursor: pointer;
+}
+
+
+.add-select-container::after {
+  content: '';
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 12px;
+  height: 12px;
+  background-image: url('../assets/arrow.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  cursor: pointer;
+  pointer-events: none;
 }
 
 input{
     padding-left: 0.5rem; 
-}
-
-.add-select-icon{
-    margin: 0;
 }
 
 header {

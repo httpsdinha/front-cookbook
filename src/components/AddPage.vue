@@ -14,10 +14,10 @@
             <input type="text" id="input-name" class="add-input-nome"/>
             
             <label for="ingrediente">Ingredientes</label>
-            <input type="text" id="input-ingrediente" class="add-input-ingrediente"/>
+            <textarea id="input-ingrediente" class="add-input-ingrediente"></textarea>
             
             <label for="preparo">Modo de Preparo</label>
-            <input type="text" id="input-preparo" class="add-input-preparo"/>
+            <textarea id="input-preparo" class="add-input-preparo"></textarea>
 
             <nav class="add-filtersall">
                 <div class="add-select-container">
@@ -47,6 +47,10 @@
                     <option value="3">+6 pessoas</option>
                 </select>
                 </div>
+                <div class="add-select-containeimage">
+                  <input type="file" id="image-upload" class="image-upload" @change="handleImageUpload" />
+                  <label for="image-upload" class="image-upload-label">Upload Imagem</label>
+                </div>
             </nav>
             <button type="submit" class="add-button-adicionar">Adicionar</button>
         </form>
@@ -60,6 +64,11 @@ export default {
   methods: {
     goToPage(route) {
       this.$router.push(route);
+    },
+    handleImageUpload(event) {
+      const file = event.target.files[0];
+      // Handle the file upload logic here
+      console.log(file);
     },
   },
 };
@@ -118,8 +127,10 @@ h2 {
 }
 
 .add-input-preparo, .add-input-ingrediente {
-    width: 100%; 
-    height: 5.9375rem;
+    padding-top: 0.5rem; 
+    width: 100%;
+    height: 5rem;
+    padding:0.5rem;
 }
 
 .add-button-adicionar{
@@ -142,8 +153,9 @@ h2 {
 
 .add-filtersall {
   display: flex;
-  justify-content: center;
+  justify-content: space-between; /* Changed from flex-start to space-between */
   gap: 1rem;
+  width: 100%; 
 }
 
 .add-select-container {
@@ -190,7 +202,7 @@ h2 {
 }
 
 input{
-    padding-left: 0.5rem; 
+    padding: 5px;
 }
 
 header {
@@ -247,5 +259,22 @@ h1 {
   transform: translateY(-50%);
   width: 15px;
   height: 15px;
+}
+
+.image-upload {
+  display: none;
+}
+
+.image-upload-label {
+  border-radius: 0.3125rem;
+  background: linear-gradient(270deg, #a12a09 -0.82%, #940d0d 98.56%);
+  padding: 0.3rem 1rem;
+  cursor: pointer;
+  color: #fff;
+  font-family: 'Jura';
+  
+}
+.add-select-containeimage{
+  margin-left: auto; 
 }
 </style>

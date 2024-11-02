@@ -165,6 +165,7 @@ main {
 .right_main {
   margin-left: 1rem;
   margin-right: 1rem;
+  width: 100%;
 }
 
 .right_main h2{
@@ -204,6 +205,7 @@ main {
   margin-bottom: 30px;
   box-sizing: border-box;
   word-wrap: break-word;
+  max-width: 100%;
 }
 
 .info-container {

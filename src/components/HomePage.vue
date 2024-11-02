@@ -45,7 +45,7 @@
         <section class="home-recipe-details">
           <h2>{{ recipe.name }}</h2>
           <p>{{ recipe.description }} </p>
-          <button class="home-ver" @click="goToPage(`/id/${recipe.id}`)">
+          <button class="home-ver" @click="goToPage('/receita')">
             Ver
           </button>
         </section>
@@ -65,8 +65,8 @@ export default {
     };
   },
   methods: {
-    goToPage(url) {
-      this.$router.push(url);
+    goToPage(route) {
+      this.$router.push(route);
     },
   },
 };

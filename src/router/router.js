@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router';
 import HomePage from '@/components/InitialPage.vue';  
 import InitialPage from '@/components/HomePage.vue'; 
 import AddPage from '@/components/AddPage.vue';
+import RecipePage from '@/components/RecipePage.vue';
 
 const routes = [
   {
@@ -19,6 +20,11 @@ const routes = [
     name: 'AddPage',
     component: AddPage
   },
+  {
+    path: '/receita',
+    name: 'RecipePage',
+    component: RecipePage
+  }
 
 ];
 

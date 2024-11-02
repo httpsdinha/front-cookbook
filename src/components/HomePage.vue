@@ -89,7 +89,6 @@ header {
 }
 
 h1 {
-  margin-left: 7.12rem;
   color: #fff;
   font-family: 'Jost';
   font-size: 2rem;

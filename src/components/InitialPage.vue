@@ -60,7 +60,6 @@ body {
   word-wrap: break-word;
   font-family: Jost;
   display: flex;
-  margin-left: 5%;
   flex-direction: column;
   align-items: flex-start;
   position: relative;
@@ -70,6 +69,7 @@ body {
   font-size: 96px;
   font-weight: 400;
   margin-bottom: 0px;
+  margin-left: 2rem;
 }
 
 .initial-subtitle {

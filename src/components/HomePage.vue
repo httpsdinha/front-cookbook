@@ -8,7 +8,7 @@
   </header>
   <nav class="home-filtersall">
     <div class="home-select-container">
-      <img src="../assets/saco-de-dolar.png" alt="Valor Icon" class="home-select-icon" /> 
+      <img src="@/assets/saco-de-dolar.png" alt="Valor Icon" class="home-select-icon" /> 
       <select class="home-filters" ref="customSelect">
         <option value="0">Valor</option>
         <option value="1">Alto</option>
@@ -17,7 +17,7 @@
       </select>
     </div>
     <div class="home-select-container">
-      <img src="../assets/relogio-tres.png" alt="Tempo Icon" class="home-select-icon" /> 
+      <img src="@/assets/relogio-tres.png" alt="Tempo Icon" class="home-select-icon" /> 
       <select class="home-filters">
         <option value="0">Tempo</option>
         <option value="1">10-30min</option>
@@ -26,7 +26,7 @@
       </select>
     </div>
     <div class="home-select-container">
-      <img src="../assets/restaurante.png" alt="Serve Icon" class="home-select-icon" /> 
+      <img src="@/assets/restaurante.png" alt="Serve Icon" class="home-select-icon" /> 
       <select class="home-filters">
         <option value="0">Serve</option>
         <option value="1">1-2 pessoas</option>
@@ -41,9 +41,9 @@
   <main>
     <section class="home-recipes-container">
       <article v-for="recipe in recipes" :key="recipe.id" class="home-recipe">
-        <img :src="recipe.image" alt="fotoreceita" class="home-fotoreceita">
+        <img :src="require(`@/assets/${recipe.image}`)" alt="fotoreceita" class="home-fotoreceita">
         <section class="home-recipe-details">
-          <h2>{{ recipe.name }}</h2>
+          <h2 class="recipe-name">{{ recipe.name }}</h2>
           <p>{{ recipe.description }} </p>
           <button class="home-ver" @click="goToPage('/receita')">
             Ver
@@ -137,6 +137,7 @@ h1 {
   position: relative;
   display: inline-flex;
   align-items: center;
+  margin-right: 1rem; 
 }
 
 .home-select-icon {
@@ -145,14 +146,14 @@ h1 {
   left: 10px;
   width: 16px;
   height: 16px;
-  pointer-events: none; /* Evita que o ícone interfira na interação */
+  pointer-events: none; 
 }
 
 .home-filters {
   font-family: 'Jura';
   width: 7.0625rem;
   height: 1.5625rem;
-  padding-left: 35px; /* Ajuste para ícone */
+  padding-left: 35px;
   border-radius: 0.3125rem;
   background: #fff;
   border: none;
@@ -163,8 +164,28 @@ h1 {
 }
 
 .home-filtersall {
-  margin-left: 7.38rem;
   margin-top: 2rem;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: calc(100% - 26rem); /* Reduce width */
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.home-filtersall > .home-adicionar {
+  margin-left: auto; 
+  background: linear-gradient(90deg, #A12A09 0%, #940D0D 100%);
+  font-family: 'Jost';
+  border-radius: 0.3125rem;
+  border: none;
+  color: #FFF;
+  width: 100%;
+  max-width: 7.0625rem;
+  height: 1.5625rem;
+  cursor: pointer;
+  margin-top: 0.6rem;
 }
 
 /* Seta customizada */
@@ -187,7 +208,6 @@ h1 {
   background-color: #fff;
   border-radius: 0.3125rem;
   margin-top: 1.25rem;
-  margin-left: 8rem;
   width: 100%;
   max-width: 31.625rem;
   height: auto;
@@ -204,9 +224,7 @@ h1 {
   max-width: 7.0625rem;
   height: 1.5625rem;
   float: right;
-  margin-right: 7.38rem;
   cursor: pointer;
-  margin-top: 0.6rem;
 }
 
 .home-ver {
@@ -272,6 +290,7 @@ h1 {
   line-height: normal;
   margin-bottom: 0.5rem;
   margin-top: 1rem;
+  text-align: left; 
 }
 
 p {
@@ -304,19 +323,82 @@ p {
   }
 
   .home-recipe {
-    width: calc(100% - 0.5rem); /* 1 item por linha */
+    width: calc(100% - 0.5rem); 
   }
 }
 
 @media (max-width: 1200px) {
   .home-recipe {
-    width: calc(33.33% - 0.5rem); /* 3 items por linha */
+    width: calc(33.33% - 0.5rem); 
   }
 }
 
 @media (max-width: 900px) {
   .home-recipe {
-    width: calc(50% - 0.5rem); /* 2 items por linha */
+    width: calc(50% - 0.5rem); 
+  }
+}
+
+@media (max-width: 600px) {
+  header {
+    flex-direction: column;
+    padding: 0.5rem;
+  }
+
+  .home-search {
+    margin-left: 0;
+    width: 100%;
+  }
+
+  .home-filtersall {
+    flex-direction: column;
+    align-items: center;
+    margin-left: 0;
+  }
+
+  .home-select-container {
+    width: 100%;
+    margin-bottom: 0.5rem;
+  }
+
+  .home-adicionar {
+    width: 100%;
+    margin-right: 0;
+  }
+
+  .home-recipe {
+    width: calc(100% - 1rem);
+    margin: 1rem 0;
+  }
+}
+
+@media (max-width: 900px) {
+  .home-filtersall {
+    flex-direction: column;
+    align-items: center;
+    margin-left: 0;
+  }
+
+  .home-select-container {
+    width: 100%;
+    margin-bottom: 0.5rem;
+  }
+
+  .home-adicionar {
+    width: 100%;
+    margin-right: 0;
+  }
+
+  .home-recipe {
+    width: calc(50% - 1rem);
+    margin: 1rem 0.5rem;
+  }
+}
+
+@media (max-width: 1200px) {
+  .home-recipe {
+    width: calc(33.33% - 1rem);
+    margin: 1rem 0.5rem;
   }
 }
 </style>

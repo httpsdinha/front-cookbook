@@ -1,54 +1,54 @@
 <template>
   <header>
     <h1 @click="goToPage('/')">CookBook</h1>
-    <aside class="Search responsive-search">
-      <input type="text" class="Search-Input" placeholder="Pesquisar" />
-      <img class="Search-Icon" src="../assets/procurar.png" alt="Search Icon" />
+    <aside class="home-search responsive-search">
+      <input type="text" class="home-search-input" placeholder="Pesquisar" />
+      <img class="home-search-icon" src="../assets/procurar.png" alt="Search Icon" />
     </aside>
   </header>
-  <nav class="filtersall">
-    <div class="select-container">
-      <img src="../assets/saco-de-dolar.png" alt="Valor Icon" class="select-icon" /> 
-      <select class="filters" ref="customSelect">
+  <nav class="home-filtersall">
+    <div class="home-select-container">
+      <img src="../assets/saco-de-dolar.png" alt="Valor Icon" class="home-select-icon" /> 
+      <select class="home-filters" ref="customSelect">
         <option value="0">Valor</option>
         <option value="1">Alto</option>
         <option value="2">Médio</option>
         <option value="3">Baixo</option>
       </select>
     </div>
-    <div class="select-container">
-      <img src="../assets/relogio-tres.png" alt="Tempo Icon" class="select-icon" /> 
-      <select class="filters">
+    <div class="home-select-container">
+      <img src="../assets/relogio-tres.png" alt="Tempo Icon" class="home-select-icon" /> 
+      <select class="home-filters">
         <option value="0">Tempo</option>
         <option value="1">10-30min</option>
         <option value="2">30-60min</option>
         <option value="3">+60min</option>
       </select>
     </div>
-    <div class="select-container">
-      <img src="../assets/restaurante.png" alt="Serve Icon" class="select-icon" /> 
-      <select class="filters">
+    <div class="home-select-container">
+      <img src="../assets/restaurante.png" alt="Serve Icon" class="home-select-icon" /> 
+      <select class="home-filters">
         <option value="0">Serve</option>
         <option value="1">1-2 pessoas</option>
         <option value="2">3-5 pessoas</option>
         <option value="3">+6 pessoas</option>
       </select>
     </div>
-    <button class="adicionar" @click="goToPage('/adicionar')">
-          Adicionar
+    <button class="home-adicionar" @click="goToPage('/adicionar')">
+      Adicionar
     </button>
   </nav>
   <main>
-    <section class="recipes-container">
-      <article v-for="recipe in recipes" :key="recipe.id" class="recipe">
-        <img :src="recipe.image" alt="fotoreceita" class="fotoreceita">
-        <section class="recipe-details">
+    <section class="home-recipes-container">
+      <article v-for="recipe in recipes" :key="recipe.id" class="home-recipe">
+        <img :src="recipe.image" alt="fotoreceita" class="home-fotoreceita">
+        <section class="home-recipe-details">
           <h2>{{ recipe.name }}</h2>
           <p>{{ recipe.description }} </p>
-          <button class="ver" @click="goToPage(`/id/${recipe.id}`)">
-          Ver
+          <button class="home-ver" @click="goToPage(`/id/${recipe.id}`)">
+            Ver
           </button>
-       </section>
+        </section>
       </article>
     </section>
   </main>
@@ -89,7 +89,6 @@ header {
 }
 
 h1 {
-  margin-left: 7.12rem;
   color: #fff;
   font-family: 'Jost';
   font-size: 2rem;
@@ -99,35 +98,32 @@ h1 {
   cursor: pointer;
 }
 
-.Search {
+.home-search {
   margin: auto;
   margin-left: 10%;
   position: relative;
   display: inline-block;
   width: 100%;
-  
 }
 
 .responsive-search {
   display: flex;
   align-items: center;
   width: 100%;
-  
 }
 
-.Search-Input {
+.home-search-input {
   flex: 1;
   padding-left: 30px;
   border-radius: 0.3125rem;
   background: #d9d9d9;
   border: none;
-  width: 100%; 
-  max-width: 39.4375rem; 
+  width: 100%;
+  max-width: 39.4375rem;
   height: 1.6875rem;
-  
 }
 
-.Search-Icon {
+.home-search-icon {
   cursor: pointer;
   position: absolute;
   left: 5px;
@@ -137,13 +133,13 @@ h1 {
   height: 15px;
 }
 
-.select-container {
+.home-select-container {
   position: relative;
   display: inline-flex;
   align-items: center;
 }
 
-.select-icon {
+.home-select-icon {
   margin: 5px;
   position: absolute;
   left: 10px;
@@ -152,7 +148,7 @@ h1 {
   pointer-events: none; /* Evita que o ícone interfira na interação */
 }
 
-.filters {
+.home-filters {
   font-family: 'Jura';
   width: 7.0625rem;
   height: 1.5625rem;
@@ -166,26 +162,28 @@ h1 {
   cursor: pointer;
 }
 
-nav{
+.home-filtersall {
   margin-left: 7.38rem;
   margin-top: 2rem;
 }
+
 /* Seta customizada */
-.select-container::after {
+.home-select-container::after {
   content: '';
   position: absolute;
   right: 20px;
   top: 50%;
   transform: translateY(-50%);
-  width: 12px; 
-  height: 12px; 
-  background-image: url('../assets/arrow.png'); 
+  width: 12px;
+  height: 12px;
+  background-image: url('../assets/arrow.png');
   background-size: contain;
   background-repeat: no-repeat;
   cursor: pointer;
   pointer-events: none;
 }
-article{
+
+.home-recipe {
   background-color: #fff;
   border-radius: 0.3125rem;
   margin-top: 1.25rem;
@@ -196,7 +194,7 @@ article{
   flex-shrink: 0;
 }
 
-.adicionar{
+.home-adicionar {
   background: linear-gradient(90deg, #A12A09 0%, #940D0D 100%);
   font-family: 'Jost';
   border-radius: 0.3125rem;
@@ -211,7 +209,7 @@ article{
   margin-top: 0.6rem;
 }
 
-.ver {
+.home-ver {
   cursor: pointer;
   width: 4rem;
   height: 1.75rem;
@@ -226,59 +224,46 @@ article{
   position: absolute;
   bottom: 0;
   right: 0;
-  margin: 1rem; 
+  margin: 1rem;
 }
 
-.ver:hover, .adicionar:hover{
+.home-ver:hover,
+.home-adicionar:hover {
   background: #A12A09;
 }
 
-.fotoreceita{
+.home-fotoreceita {
   width: 9.375rem;
   height: 9.375rem;
   flex-shrink: 0;
   margin: 1rem;
 }
 
-.recipe{
+.home-recipe {
   display: flex;
-  width: calc(100% - 0.5rem); 
+  width: calc(100% - 0.5rem);
   box-sizing: border-box;
   margin: 2.5rem;
   margin-bottom: 0rem;
   position: relative;
 }
 
-.recipes-container {
+.home-recipes-container {
   display: flex;
   justify-content: center;
-  flex-wrap: wrap; 
-  margin: 0 auto; 
-  max-width: 100%; 
-  overflow: hidden; 
+  flex-wrap: wrap;
+  margin: 0 auto;
+  max-width: 100%;
+  overflow: hidden;
 }
 
-
-p {
-  color: #000;
-  font-family: Jura;
-  font-size: 0.9375rem;
-  font-style: normal;
-  font-weight: 600;
-  line-height: normal;
-  width: 100%; /* Ajusta a largura para 100% do contêiner */
-  max-width: 17.875rem; /* Define uma largura máxima */
-  margin-top: 0;
-  word-wrap: break-word; 
-  overflow-wrap: break-word; /* Permite quebra de palavras */
-}
-.recipe-details {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    max-width: 100%;
+.home-recipe-details {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
 }
 
-.recipe-details h2{
+.home-recipe-details h2 {
   color: #000;
   font-family: Jura;
   font-size: 1.5rem;
@@ -296,13 +281,12 @@ p {
   font-style: normal;
   font-weight: 600;
   line-height: normal;
-  width: 100%; 
-  max-width: 17.875rem; 
+  width: 100%;
+  max-width: 17.875rem;
   margin-top: 0;
-  word-wrap: break-word; 
-  overflow-wrap: break-word; 
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
-
 
 @media (max-width: 600px) {
   .responsive-search {
@@ -310,28 +294,28 @@ p {
     align-items: stretch;
   }
 
-  .Search-Input {
+  .home-search-input {
     width: 100%;
     margin-bottom: 10px;
   }
 
-  .Search-Icon {
+  .home-search-icon {
     align-self: center;
   }
 
-  .recipe {
+  .home-recipe {
     width: calc(100% - 0.5rem); /* 1 item por linha */
   }
 }
 
 @media (max-width: 1200px) {
-  .recipe {
+  .home-recipe {
     width: calc(33.33% - 0.5rem); /* 3 items por linha */
   }
 }
 
 @media (max-width: 900px) {
-  .recipe {
+  .home-recipe {
     width: calc(50% - 0.5rem); /* 2 items por linha */
   }
 }

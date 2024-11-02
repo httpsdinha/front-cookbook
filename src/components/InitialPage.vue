@@ -1,21 +1,21 @@
 <template>
-  <main class="main-container">
-  <section class="left-container">
-    <div class="text">
-    <h1 class="title">CookBook</h1>
-      <h2 class="subtitle">Cook que é bom nada...</h2>
-    </div>
-  </section>
-  <section class="right-container">
-    <router-link to="/home">
-      <button class="next" @click="goToPage('/home')">
-       Avançar
-      </button>
-    </router-link>
-  </section> 
-</main> 
+  <main class="initial-main-container">
+    <section class="initial-left-container">
+      <div class="initial-text">
+        <h1 class="initial-title">CookBook</h1>
+        <h2 class="initial-subtitle">Cook que é bom nada...</h2>
+      </div>
+    </section>
+    <section class="initial-right-container">
+      <router-link to="/home">
+        <button class="initial-next" @click="goToPage('/home')">
+          Avançar
+        </button>
+      </router-link>
+    </section>
+  </main>
 </template>
-  
+
 <script>
 export default {
   name: "TelaInicial",
@@ -29,7 +29,7 @@ export default {
 
 <style>
 /* Geral */
-body{
+body {
   background-color: white;
   margin: 0;
   padding: 0;
@@ -38,44 +38,41 @@ body{
   font-family: 'Jost';
 }
 
-.main-container{
+.initial-main-container {
   display: flex;
   height: 100vh;
   overflow: hidden;
-  
 }
 
 /* Lado Esquerdo */
-.left-container{
+.initial-left-container {
   width: 50%;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
   align-items: flex-start;
-  background: linear-gradient(267deg, #A12A09 0%, #940D0D 100%); 
+  background: linear-gradient(267deg, #A12A09 0%, #940D0D 100%);
   box-shadow: 15px 4px 19.8px rgba(0, 0, 0, 0.50);
 }
 
-.text{
+.initial-text {
   color: white;
   word-wrap: break-word;
   font-family: Jost;
   display: flex;
-  margin-left: 5%;
   flex-direction: column;
   align-items: flex-start;
   position: relative;
-  
 }
 
-.title{
+.initial-title {
   font-size: 96px;
   font-weight: 400;
   margin-bottom: 0px;
-
+  margin-left: 2rem;
 }
 
-.subtitle{
+.initial-subtitle {
   font-family: 'Josefin Slab';
   font-style: italic;
   font-size: 24px;
@@ -85,25 +82,25 @@ body{
 }
 
 /* Lado Direito */
-.right-container{
+.initial-right-container {
   background-image: url('../assets/wallpaper.jpg');
   background-size: cover;
   background-position: center;
   width: 50%;
   display: flex;
   flex-direction: column;
-  align-items: center; 
-  justify-content: center; 
-  
+  align-items: center;
+  justify-content: center;
 }
 
-.next{
+.initial-next {
   background: linear-gradient(
-    90deg, 
-    #A12A09 0%, 
-    #940D0D 50%); 
-  box-shadow: -6px 8px 23.399999618530273px 3px rgba(0, 0, 0, 0.25); 
-  border-radius: 5px; 
+    90deg,
+    #A12A09 0%,
+    #940D0D 50%
+  );
+  box-shadow: -6px 8px 23.399999618530273px 3px rgba(0, 0, 0, 0.25);
+  border-radius: 5px;
   border: 1px rgba(0, 0, 0, 0.26) solid;
   color: #D9D9D9;
   font-size: 40px;
@@ -117,8 +114,7 @@ body{
   right: 5%;
 }
 
-.next:hover{
+.initial-next:hover {
   background: #A12A09;
 }
-
 </style>

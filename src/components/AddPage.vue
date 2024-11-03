@@ -11,18 +11,18 @@
         <h2>Adicionar Receita</h2>
         <form @submit.prevent="submitForm">
             <label for="name">Nome da Receita</label>
-            <input type="text" id="input-name" class="add-input-nome" v-model="recipeName"/>
+            <input type="text" id="input-name" class="add-input-nome" v-model="nome"/>
             
             <label for="ingrediente">Ingredientes</label>
-            <textarea id="input-ingrediente" class="add-input-ingrediente" v-model="ingredients"></textarea>
+            <textarea id="input-ingrediente" class="add-input-ingrediente" v-model="ingredientes"></textarea>
             
             <label for="preparo">Modo de Preparo</label>
-            <textarea id="input-preparo" class="add-input-preparo" v-model="preparation"></textarea>
+            <textarea id="input-preparo" class="add-input-preparo" v-model="modo_prep"></textarea>
 
             <nav class="add-filtersall">
                 <div class="add-select-container">
                 <img src="../assets/saco-de-dolar.png" alt="Valor Icon" class="add-select-icon" /> 
-                <select class="add-filters" ref="customSelect" v-model="value">
+                <select class="add-filters" ref="customSelect" v-model="custo">
                     <option value="0">Valor</option>
                     <option value="Alto">Alto</option>
                     <option value="Médio">Médio</option>
@@ -31,7 +31,7 @@
                 </div>
                 <div class="add-select-container">
                 <img src="../assets/relogio-tres.png" alt="Tempo Icon" class="add-select-icon" /> 
-                <select class="add-filters" v-model="time">
+                <select class="add-filters" v-model="tempo">
                     <option value="0">Tempo</option>
                     <option value="10-30min">10-30min</option>
                     <option value="30-60min">30-60min</option>
@@ -40,7 +40,7 @@
                 </div>
                 <div class="add-select-container">
                 <img src="../assets/restaurante.png" alt="Serve Icon" class="add-select-icon" /> 
-                <select class="add-filters" v-model="servings">
+                <select class="add-filters" v-model="qtd_pessoas">
                     <option value="0">Serve</option>
                     <option value="1-2 pessoas">1-2 pessoas</option>
                     <option value="3-5 pessoas">3-5 pessoas</option>
@@ -67,12 +67,12 @@ export default {
   name: "AddPage",
   data() {
     return {
-      recipeName: '',
-      ingredients: '',
-      preparation: '',
-      value: '0',
-      time: '0',
-      servings: '0',
+      nome: '',
+      ingredientes: '',
+      modo_prep: '',
+      custo: '0',
+      tempo: '0',
+      qtd_pessoas: '0',
       image: null,
       imageName: '',
       successMessage: '',
@@ -80,7 +80,7 @@ export default {
   },
   computed: {
     isFormIncomplete() {
-      return !this.recipeName || !this.ingredients || !this.preparation || this.value === '0' || this.time === '0' || this.servings === '0';
+      return !this.nome || !this.ingredientes || !this.modo_prep || this.custo === '0' || this.tempo === '0' || this.qtd_pessoas === '0';
     }
   },
   methods: {
@@ -98,12 +98,12 @@ export default {
       }
 
       const formData = new FormData();
-      formData.append('recipeName', this.recipeName);
-      formData.append('ingredients', this.ingredients);
-      formData.append('preparation', this.preparation);
-      formData.append('value', this.value);
-      formData.append('time', this.time);
-      formData.append('servings', this.servings);
+      formData.append('nome', this.nome);
+      formData.append('ingredientes', this.ingredientes);
+      formData.append('modo_prep', this.modo_prep);
+      formData.append('custo', this.custo);
+      formData.append('tempo', this.tempo);
+      formData.append('qtd_pessoas', this.qtd_pessoas);
       if (this.image) {
         formData.append('image', this.image);
       }
@@ -113,7 +113,7 @@ export default {
       }
 
       try {
-        const response = await axios.post('http:localhost:3000/adicionar', formData, {
+        const response = await axios.post('http://localhost:8090/receita/adicionar', formData, {
           headers: {
             'Content-Type': 'multipart/form-data'
           }
@@ -125,7 +125,6 @@ export default {
         console.error('Error submitting form:', error);
       }
     },
-    
   },
 };
 </script>

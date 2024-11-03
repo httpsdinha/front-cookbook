@@ -9,66 +9,121 @@
   <main class="main-container">
     <section class="add-form-container">
         <h2>Adicionar Receita</h2>
-        <form>
+        <form @submit.prevent="submitForm">
             <label for="name">Nome da Receita</label>
-            <input type="text" id="input-name" class="add-input-nome"/>
+            <input type="text" id="input-name" class="add-input-nome" v-model="nome"/>
             
             <label for="ingrediente">Ingredientes</label>
-            <textarea id="input-ingrediente" class="add-input-ingrediente"></textarea>
+            <textarea id="input-ingrediente" class="add-input-ingrediente" v-model="ingredientes"></textarea>
             
             <label for="preparo">Modo de Preparo</label>
-            <textarea id="input-preparo" class="add-input-preparo"></textarea>
+            <textarea id="input-preparo" class="add-input-preparo" v-model="modo_prep"></textarea>
 
             <nav class="add-filtersall">
                 <div class="add-select-container">
                 <img src="../assets/saco-de-dolar.png" alt="Valor Icon" class="add-select-icon" /> 
-                <select class="add-filters" ref="customSelect">
+                <select class="add-filters" ref="customSelect" v-model="custo">
                     <option value="0">Valor</option>
-                    <option value="1">Alto</option>
-                    <option value="2">Médio</option>
-                    <option value="3">Baixo</option>
+                    <option value="Alto">Alto</option>
+                    <option value="Médio">Médio</option>
+                    <option value="Baixo">Baixo</option>
                 </select>
                 </div>
                 <div class="add-select-container">
                 <img src="../assets/relogio-tres.png" alt="Tempo Icon" class="add-select-icon" /> 
-                <select class="add-filters">
+                <select class="add-filters" v-model="tempo">
                     <option value="0">Tempo</option>
-                    <option value="1">10-30min</option>
-                    <option value="2">30-60min</option>
-                    <option value="3">+60min</option>
+                    <option value="10-30min">10-30min</option>
+                    <option value="30-60min">30-60min</option>
+                    <option value="+60min">+60min</option>
                 </select>
                 </div>
                 <div class="add-select-container">
                 <img src="../assets/restaurante.png" alt="Serve Icon" class="add-select-icon" /> 
-                <select class="add-filters">
+                <select class="add-filters" v-model="qtd_pessoas">
                     <option value="0">Serve</option>
-                    <option value="1">1-2 pessoas</option>
-                    <option value="2">3-5 pessoas</option>
-                    <option value="3">+6 pessoas</option>
+                    <option value="1-2 pessoas">1-2 pessoas</option>
+                    <option value="3-5 pessoas">3-5 pessoas</option>
+                    <option value="+6 pessoas">+6 pessoas</option>
                 </select>
                 </div>
                 <div class="add-select-containeimage">
                   <input type="file" id="image-upload" class="image-upload" @change="handleImageUpload" />
-                  <label for="image-upload" class="image-upload-label">Upload Imagem</label>
+                  <label for="image-upload" class="image-upload-label">Enviar Imagem</label>
+                  <p v-if="imageName" class="image-name">{{ imageName }}</p>
                 </div>
             </nav>
-            <button type="submit" class="add-button-adicionar">Adicionar</button>
+            <button type="submit" class="add-button-adicionar" :disabled="isFormIncomplete">Adicionar</button>
         </form>
+        <p v-if="successMessage" class="success-message">{{ successMessage }}</p>
     </section>
   </main>
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
   name: "AddPage",
+  data() {
+    return {
+      nome: '',
+      ingredientes: '',
+      modo_prep: '',
+      custo: '0',
+      tempo: '0',
+      qtd_pessoas: '0',
+      image: null,
+      imageName: '',
+      successMessage: '',
+    };
+  },
+  computed: {
+    isFormIncomplete() {
+      return !this.nome || !this.ingredientes || !this.modo_prep || this.custo === '0' || this.tempo === '0' || this.qtd_pessoas === '0';
+    }
+  },
   methods: {
     goToPage(route) {
       this.$router.push(route);
     },
     handleImageUpload(event) {
-      const file = event.target.files[0];
-      // Handle the file upload logic here
-      console.log(file);
+      this.image = event.target.files[0];
+      this.imageName = this.image ? `${this.image.name} (${this.image.type})` : '';
+    },
+    async submitForm() {
+      if (this.isFormIncomplete) {
+        alert('Por favor, preencha todos os campos.');
+        return;
+      }
+
+      const formData = new FormData();
+      formData.append('nome', this.nome);
+      formData.append('ingredientes', this.ingredientes);
+      formData.append('modo_prep', this.modo_prep);
+      formData.append('custo', this.custo);
+      formData.append('tempo', this.tempo);
+      formData.append('qtd_pessoas', this.qtd_pessoas);
+      if (this.image) {
+        formData.append('image', this.image);
+      }
+      // Log para verificar os dados do formData
+      for (let [key, value] of formData.entries()) {
+        console.log(`${key}: ${value}`);
+      }
+
+      try {
+        const response = await axios.post('http://localhost:8090/receita/adicionar', formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          }
+        });
+        console.log('Form submitted successfully:', response.data);
+        this.successMessage = 'Receita enviada com sucesso!';
+        alert('Receita adicionada com sucesso!');
+      } catch (error) {
+        console.error('Error submitting form:', error);
+      }
     },
   },
 };
@@ -149,6 +204,11 @@ h2 {
     left: 50%; 
     transform: translateX(-50%); 
     cursor: pointer;
+}
+
+.add-button-adicionar:disabled {
+  background: #ccc;
+  cursor: not-allowed;
 }
 
 .add-filtersall {
@@ -276,5 +336,78 @@ h1 {
 }
 .add-select-containeimage{
   margin-left: auto; 
+}
+
+.success-message {
+  color: green;
+  text-align: center;
+  margin-top: 1rem;
+  font-family: 'Jost';
+}
+
+.image-name {
+  margin-top: 0.5rem;
+  font-family: 'Jura';
+  color: #333;
+}
+
+@media (max-width: 768px) {
+  .main-container {
+    height: auto;
+    padding: 1rem;
+  }
+
+  .add-form-container {
+    width: 100%;
+    height: auto;
+    padding: 1rem;
+  }
+
+  form {
+    width: 100%;
+  }
+
+  .add-input-nome, .add-input-ingrediente, .add-input-preparo {
+    width: 100%;
+  }
+
+  .add-filtersall {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .add-select-container {
+    width: 100%;
+  }
+
+  .add-filters {
+    width: 100%;
+    padding-left: 2rem;
+  }
+
+  .add-button-adicionar {
+    width: 100%;
+    position: static;
+    transform: none;
+    margin-top: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .home-search-input {
+    padding-left: 2rem;
+  }
+
+  .home-search-icon {
+    left: 0.5rem;
+  }
+
+  .add-select-icon {
+    left: 0.5rem;
+  }
+
+  .add-filters {
+    padding-left: 2.5rem;
+  }
 }
 </style>

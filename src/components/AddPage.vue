@@ -24,36 +24,38 @@
                 <img src="../assets/saco-de-dolar.png" alt="Valor Icon" class="add-select-icon" /> 
                 <select class="add-filters" ref="customSelect" v-model="value">
                     <option value="0">Valor</option>
-                    <option value="1">Alto</option>
-                    <option value="2">Médio</option>
-                    <option value="3">Baixo</option>
+                    <option value="Alto">Alto</option>
+                    <option value="Médio">Médio</option>
+                    <option value="Baixo">Baixo</option>
                 </select>
                 </div>
                 <div class="add-select-container">
                 <img src="../assets/relogio-tres.png" alt="Tempo Icon" class="add-select-icon" /> 
                 <select class="add-filters" v-model="time">
                     <option value="0">Tempo</option>
-                    <option value="1">10-30min</option>
-                    <option value="2">30-60min</option>
-                    <option value="3">+60min</option>
+                    <option value="10-30min">10-30min</option>
+                    <option value="30-60min">30-60min</option>
+                    <option value="+60min">+60min</option>
                 </select>
                 </div>
                 <div class="add-select-container">
                 <img src="../assets/restaurante.png" alt="Serve Icon" class="add-select-icon" /> 
                 <select class="add-filters" v-model="servings">
                     <option value="0">Serve</option>
-                    <option value="1">1-2 pessoas</option>
-                    <option value="2">3-5 pessoas</option>
-                    <option value="3">+6 pessoas</option>
+                    <option value="1-2 pessoas">1-2 pessoas</option>
+                    <option value="3-5 pessoas">3-5 pessoas</option>
+                    <option value="+6 pessoas">+6 pessoas</option>
                 </select>
                 </div>
                 <div class="add-select-containeimage">
                   <input type="file" id="image-upload" class="image-upload" @change="handleImageUpload" />
-                  <label for="image-upload" class="image-upload-label">Upload Imagem</label>
+                  <label for="image-upload" class="image-upload-label">Enviar Imagem</label>
+                  <p v-if="imageName" class="image-name">{{ imageName }}</p>
                 </div>
             </nav>
-            <button type="submit" class="add-button-adicionar">Adicionar</button>
+            <button type="submit" class="add-button-adicionar" :disabled="isFormIncomplete">Adicionar</button>
         </form>
+        <p v-if="successMessage" class="success-message">{{ successMessage }}</p>
     </section>
   </main>
 </template>
@@ -72,7 +74,14 @@ export default {
       time: '0',
       servings: '0',
       image: null,
+      imageName: '',
+      successMessage: '',
     };
+  },
+  computed: {
+    isFormIncomplete() {
+      return !this.recipeName || !this.ingredients || !this.preparation || this.value === '0' || this.time === '0' || this.servings === '0';
+    }
   },
   methods: {
     goToPage(route) {
@@ -80,8 +89,14 @@ export default {
     },
     handleImageUpload(event) {
       this.image = event.target.files[0];
+      this.imageName = this.image ? `${this.image.name} (${this.image.type})` : '';
     },
     async submitForm() {
+      if (this.isFormIncomplete) {
+        alert('Por favor, preencha todos os campos.');
+        return;
+      }
+
       const formData = new FormData();
       formData.append('recipeName', this.recipeName);
       formData.append('ingredients', this.ingredients);
@@ -98,16 +113,19 @@ export default {
       }
 
       try {
-        const response = await axios.post('YOUR_BACKEND_URL_HERE', formData, {
+        const response = await axios.post('http:localhost:3000/adicionar', formData, {
           headers: {
             'Content-Type': 'multipart/form-data'
           }
         });
         console.log('Form submitted successfully:', response.data);
+        this.successMessage = 'Receita enviada com sucesso!';
+        alert('Receita adicionada com sucesso!');
       } catch (error) {
         console.error('Error submitting form:', error);
       }
     },
+    
   },
 };
 </script>
@@ -187,6 +205,11 @@ h2 {
     left: 50%; 
     transform: translateX(-50%); 
     cursor: pointer;
+}
+
+.add-button-adicionar:disabled {
+  background: #ccc;
+  cursor: not-allowed;
 }
 
 .add-filtersall {
@@ -314,6 +337,19 @@ h1 {
 }
 .add-select-containeimage{
   margin-left: auto; 
+}
+
+.success-message {
+  color: green;
+  text-align: center;
+  margin-top: 1rem;
+  font-family: 'Jost';
+}
+
+.image-name {
+  margin-top: 0.5rem;
+  font-family: 'Jura';
+  color: #333;
 }
 
 @media (max-width: 768px) {

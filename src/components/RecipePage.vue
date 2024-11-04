@@ -50,15 +50,7 @@
   </main>
 </template>
 
-<script>
-export default {
-  methods: {
-    goToPage(path) {
-      this.$router.push(path);
-    }
-  }
-}
-</script>
+<script src="../scripts/recipe_script.js"></script>
 
 <style scoped>
 header {

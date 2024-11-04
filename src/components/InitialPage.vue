@@ -16,16 +16,7 @@
   </main>
 </template>
 
-<script>
-export default {
-  name: "TelaInicial",
-  methods: {
-    goToPage(route) {
-      this.$router.push(route);
-    },
-  },
-};
-</script>
+<script src="../scripts/initial_script.js"></script>
 
 <style>
 /* Geral */

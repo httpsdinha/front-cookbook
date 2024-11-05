@@ -1,30 +1,30 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import HomePage from '@/components/InitialPage.vue';  
-import InitialPage from '@/components/HomePage.vue'; 
-import AddPage from '@/components/AddPage.vue';
-import RecipePage from '@/components/RecipePage.vue';
+import RecipeAdd from '@/features/recipeAdd/views/AddRecipePage.vue';
+import RecipePage from '@/features/recipePage/views/RecipePage.vue';
+import RecipeList from '@/features/recipeList/views/RecipeListPage.vue';
+import LandingPage from '@/features/landing/views/LandingPage.vue';
 
 const routes = [
   {
     path: '/',
-    name: 'InitialPage',
-    component: HomePage
+    name: 'LandingPage',
+    component: LandingPage
   },
   {
-    path: '/home',
-    name: 'HomePage',
-    component: InitialPage
+    path: '/add',
+    name: 'RecipeAdd',
+    component: RecipeAdd
   },
   {
-    path: '/adicionar',
-    name: 'AddPage',
-    component: AddPage
-  },
-  {
-    path: '/receita',
+    path: '/recipe',
     name: 'RecipePage',
     component: RecipePage
-  }
+  },
+  {
+    path: '/recipelist',
+    name: 'RecipeList',
+    component: RecipeList
+  },
 
 ];
 

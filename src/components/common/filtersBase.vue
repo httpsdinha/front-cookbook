@@ -79,7 +79,7 @@ export default {
 
 .filters {
   font-family: 'Jura';
-  width: 8.0625rem;
+  width: 9.0625rem;
   height: 1.5625rem;
   padding-left: 35px;
   border-radius: 0.3125rem;

@@ -12,6 +12,7 @@ export function useRecipeAddViewModel() {
   const image = ref(null);
   const imageName = ref('');
   const successMessage = ref('');
+  const showAlert = ref(false); 
 
   const isFormIncomplete = computed(() => {
     return !nome.value || !ingredientes.value || !modo_prep.value || custo.value === '0' || tempo.value === '0' || qtd_pessoas.value === '0';
@@ -40,10 +41,14 @@ export function useRecipeAddViewModel() {
     try {
       await RecipeService.addRecipe(recipe.toFormData());
       successMessage.value = 'Receita enviada com sucesso!';
-      alert('Receita adicionada com sucesso!');
+      showAlert.value = true;
     } catch (error) {
       console.error('Erro ao enviar a receita:', error);
     }
+  };
+
+  const closeAlert = () => {
+    showAlert.value = false;
   };
 
   return {
@@ -58,5 +63,7 @@ export function useRecipeAddViewModel() {
     isFormIncomplete,
     handleImageUpload,
     submitForm,
+    showAlert, 
+    closeAlert,
   };
 }

@@ -4,15 +4,15 @@
     <section class="add-form-container">
       <h2>ADICIONAR RECEITA</h2>
       <RecipeForm />
-      <p v-if="successMessage" class="success-message">{{ successMessage }}</p>
+      <AlertBox v-if="successMessage" :message="successMessage" />
     </section>
   </main>
 </template>
 
 <script>
 import { useRecipeAddViewModel } from '../viewmodels/RecipeAddViewModel';
-
 export default {
+
   setup() {
     const {
       successMessage,

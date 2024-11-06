@@ -18,12 +18,12 @@
       <p v-if="imageName" class="image-name">{{ imageName }}</p>
     </article>
     <button type="submit" class="add-button-adicionar" :disabled="isFormIncomplete">ADICIONAR</button>
+    <AlertBox :show="showAlert" @close="closeAlert" />
   </form>
 </template>
 
 <script>
-import { useRecipeAddViewModel } from '../../features/recipeAdd/viewmodels/RecipeAddViewModel';
-
+import { useRecipeAddViewModel } from '../viewmodels/RecipeAddViewModel';
 export default {
   setup() {
     const {
@@ -37,6 +37,8 @@ export default {
       isFormIncomplete,
       handleImageUpload,
       submitForm,
+      showAlert,
+      closeAlert, 
     } = useRecipeAddViewModel();
 
     return {
@@ -50,6 +52,8 @@ export default {
       isFormIncomplete,
       handleImageUpload,
       submitForm,
+      showAlert,
+      closeAlert,
     };
   },
 };

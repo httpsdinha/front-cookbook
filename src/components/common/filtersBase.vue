@@ -53,7 +53,7 @@ export default {
 <style scoped>
 .filtersall {
   display: flex;
-  justify-content: flex-start;
+  justify-content: center; /* Changed from flex-start to center */
   align-items: center;
   width: calc(100% - 26rem);
   max-width: 100%;
@@ -79,7 +79,7 @@ export default {
 
 .filters {
   font-family: 'Jura';
-  width: 7.0625rem;
+  width: 8.0625rem;
   height: 1.5625rem;
   padding-left: 35px;
   border-radius: 0.3125rem;

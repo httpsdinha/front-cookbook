@@ -1,6 +1,6 @@
 <template>
   <header>
-    <h1 @click="goToPage('/recipelist')">CookBook</h1>
+    <h1 @click="goToPage('/')">CookBook</h1>
     <aside class="search responsive-search">
       <section class="input-container">
         <input type="text" class="search-input" placeholder="Pesquisar" />
@@ -46,6 +46,7 @@ header {
   text-align: center;
   background: linear-gradient(270deg, #a12a09 -0.82%, #940d0d 98.56%);
   color: white;
+  width: 100vw;
 }
 
 h1 {

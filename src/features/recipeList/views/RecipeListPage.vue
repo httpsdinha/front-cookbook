@@ -1,14 +1,16 @@
 <template>
   <header-component />
   <nav class="filters">
-    <filters-base
-      @valueChange="handleValueChange"
-      @timeChange="handleTimeChange"
-      @serveChange="handleServeChange"
-    />
-    <button-base class="button-adicionar" @click="goToPage('/add')">
-      Adicionar
-    </button-base>
+    <div class="filters-left">
+      <filters-base
+        @valueChange="handleValueChange"
+        @timeChange="handleTimeChange"
+        @serveChange="handleServeChange"
+      />
+    </div>
+    <div class="filters-right">
+      <img src="@/assets/adicionar.png" class="button-adicionar" @click="goToPage('/add')" >
+    </div>
   </nav>
 
   <main>
@@ -42,11 +44,15 @@ export default {
 <style scoped>
 .filters {
   display: flex;
-  flex-wrap: nowrap;
-  overflow-x: auto;
-  align-items: center; 
   justify-content: space-between;
-  margin: 1rem 16rem;
+  align-items: center; 
+  width: 100%; 
+  padding: 0.5rem 3rem;
+}
+
+.filters-left, .filters-right {
+  display: flex;
+  align-items: center;
 }
 
 .recipe {
@@ -86,6 +92,12 @@ export default {
   overflow: hidden;
 }
 
+.button-adicionar {
+  width: 25px;
+  height: 25px;
+  cursor: pointer;
+}
+
 .recipe-details {
   overflow: hidden;
   text-overflow: ellipsis;
@@ -120,19 +132,23 @@ p {
 
 @media (max-width: 1800px) {
   .recipe {
-    width: calc(33.33% - 0.5rem); 
+    width: calc(33.33% - 3rem); 
   }
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 1500px) {
   .recipe {
-    width: calc(50% - 0.5rem); 
+    width: calc(100% - 1rem); 
   }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 900px) {
   .recipe {
-    width: calc(100% - 1rem);
+    width: calc(100% - 0.5rem);
+  }
+
+  .filters{
+    padding: 0 1px;
   }
 }
 </style>

@@ -43,7 +43,7 @@ export default {
       this.$emit('timeChange', event.target.value);
     },
     onServeChange(event) {
-      console.log('Serve changed:', event.target.value); // Log the value
+      console.log('Serve changed:', event.target.value);
       this.$emit('serveChange', event.target.value);
     },
   },
@@ -53,9 +53,9 @@ export default {
 <style scoped>
 .filtersall {
   display: flex;
-  justify-content: center; /* Changed from flex-start to center */
+  justify-content: center; 
   align-items: center;
-  width: calc(100% - 26rem);
+  width: 30rem;
   max-width: 100%;
   cursor: pointer;
 }

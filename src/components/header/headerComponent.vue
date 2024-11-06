@@ -1,18 +1,37 @@
 <template>
-    <header>
-    <h1 @click="goToPage('/')">CookBook</h1>
+  <header>
+    <h1 @click="goToPage('/recipelist')">CookBook</h1>
     <aside class="search responsive-search">
-      <input type="text" class="search-input" placeholder="Pesquisar" />
-      <img class="search-icon" src="@/assets/procurar.png" alt="Search Icon" />
+      <section class="input-container">
+        <input type="text" class="search-input" placeholder="Pesquisar" />
+        <img class="search-icon" src="@/assets/procurar.png" alt="Search Icon" />
+      </section>
     </aside>
+    <div class="user-menu">
+      <img class="usuario" @click="toggleModal" src="@/assets/usuario.png" alt="usuario">
+      <div v-if="showModal" class="dropdown-menu">
+        <button @click="logout">Sair</button>
+      </div>
+    </div>
   </header>
 </template>
 
 <script>
 export default {
+  data() {
+    return {
+      showModal: false
+    };
+  },
   methods: {
     goToPage(route) {
       this.$router.push(route);
+    },
+    toggleModal() {
+      this.showModal = !this.showModal;
+    },
+    logout() {
+      console.log('User logged out');
     }
   }
 }
@@ -23,7 +42,7 @@ header {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 1rem;
+  padding: 1.5rem 5%;
   text-align: center;
   background: linear-gradient(270deg, #a12a09 -0.82%, #940d0d 98.56%);
   color: white;
@@ -39,28 +58,34 @@ h1 {
   cursor: pointer;
 }
 .search {
-  margin: auto;
-  margin-left: 10%;
   position: relative;
-  display: inline-block;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 100%;
+}
+
+.input-container {
+  position: relative;
+  width: 80%;
+  max-width: 39.4375rem;
 }
 
 .search-input {
   flex: 1;
   padding-left: 30px;
+  padding-right: 30px;
   border-radius: 0.3125rem;
-  background: #d9d9d9;
+  background: white;
   border: none;
   width: 100%;
-  max-width: 39.4375rem;
   height: 1.6875rem;
 }
 
 .search-icon {
   cursor: pointer;
   position: absolute;
-  left: 5px;
+  left: 10px;
   top: 50%;
   transform: translateY(-50%);
   width: 15px;
@@ -71,5 +96,42 @@ h1 {
   display: flex;
   align-items: center;
   width: 100%;
+}
+
+.usuario {
+  width: 25px;
+  height: 25px;
+  cursor: pointer;
+}
+
+.user-menu {
+  position: relative;
+}
+
+.dropdown-menu {
+  position: absolute;
+  right: 0;
+  background: white;
+  border: none;
+  border-radius: 0.3125rem;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+}
+
+.dropdown-menu button {
+  border-radius: 0.3125rem;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
+  color: #940D0D;
+  font-family: "Jura";
+  font-size: 0.8125rem;
+  font-weight: 700;
+}
+
+.dropdown-menu button:hover {
+  color: black;
 }
 </style>

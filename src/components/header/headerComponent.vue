@@ -40,7 +40,7 @@ export default {
 <style scoped>
 header {
   display: flex;
-  justify-content: center;
+  justify-content: space-between; /* Changed from center to space-between */
   align-items: center;
   padding: 1.5rem 5%;
   text-align: center;
@@ -58,6 +58,7 @@ h1 {
   line-height: normal;
   cursor: pointer;
 }
+
 .search {
   position: relative;
   display: flex;

@@ -90,6 +90,7 @@ export default {
   margin: 0 auto;
   max-width: 100%;
   overflow: hidden;
+
 }
 
 .button-adicionar {

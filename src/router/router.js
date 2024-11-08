@@ -3,6 +3,7 @@ import RecipeAdd from '@/features/recipeAdd/views/AddRecipePage.vue';
 import RecipePage from '@/features/recipePage/views/RecipePage.vue';
 import RecipeList from '@/features/recipeList/views/RecipeListPage.vue';
 import LandingPage from '@/features/landing/views/LandingPage.vue';
+import CadastroPage from '@/features/cadastro/views/CadastroPage.vue';
 
 const routes = [
   {
@@ -25,6 +26,11 @@ const routes = [
     name: 'RecipeList',
     component: RecipeList
   },
+  {
+    path: '/cadastro',
+    name: 'CadastroPage',
+    component: CadastroPage
+  }
 
 ];
 

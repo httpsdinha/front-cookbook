@@ -76,6 +76,7 @@ export default {
     border-radius: 5px;
     position: relative;
     font-family: "Jura";
+    box-shadow: -7px 14px 16px 4px rgba(0, 0, 0, 0.25);
   }
   
   .imagem_receita {

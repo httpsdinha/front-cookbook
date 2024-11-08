@@ -127,7 +127,9 @@ button:hover{
         width: 35rem;
         height: 3rem;
     }
-
+    h1{
+        margin-bottom: 3rem;
+    }
     button {
         font-size: 1.5rem;
         padding: 0.75rem 3rem;

@@ -38,7 +38,7 @@ export default {
   box-shadow: -6px 8px 23.399999618530273px 3px rgba(0, 0, 0, 0.25);
   border-radius: 5px;
   border: 1px rgba(0, 0, 0, 0.26) solid;
-  color: #D9D9D9;
+  color: #fff;
   font-size: 40px;
   font-family: "Imprima", sans-serif;
   font-weight: 400;

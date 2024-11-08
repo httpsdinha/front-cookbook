@@ -25,6 +25,14 @@ export default {
     expandLeft() {
       this.showLogin = true;
     },
+    showLoginComponent() {
+      this.showLogin = true;
+    },
+  },
+  created() {
+    if (this.$route.query.login) {
+      this.expandLeft();
+    }
   },
 };
 </script>

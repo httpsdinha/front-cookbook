@@ -1,5 +1,5 @@
 <template>
-  <section class="left">
+  <section class="left" :class="{ expanded: expanded }">
     <div class="text">
       <h1>CookBook</h1>
       <h2>Cook que é bom nada...</h2>
@@ -10,7 +10,13 @@
 <script>
 export default {
   name: 'LeftComponent',
-}
+  props: {
+    expanded: {
+      type: Boolean,
+      default: false,
+    },
+  },
+};
 </script>
 
 <style scoped>
@@ -20,6 +26,11 @@ export default {
   justify-content: flex-end;
   align-items: flex-start;
   background: linear-gradient(267deg, #A12A09 0%, #940D0D 100%);
+  transition: width 0.5s;
+}
+
+.left.expanded {
+  width: 100%;
 }
 
 .text {

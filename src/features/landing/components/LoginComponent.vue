@@ -1,0 +1,109 @@
+<template>
+    <section class="container-login">
+        <h1>ENTRAR</h1>
+        <form class="form-login">
+            <label for="email" class="label">E-mail</label>
+            <input type="email" class="input" id="email" name="email" required>
+            <label for="password" class="label">Senha</label>
+            <input type="password" id="password" class="input" name="password" required>
+            <button type="submit" @click="goToPage('/recipelist')" >ENTRAR</button>
+            <a href="/cadastro" class="register-link">Cadastre-se</a>
+        </form>
+    </section>
+</template>
+
+<script>
+export default {
+    name: "LoginComponent",
+    methods: {
+      goToPage(route) {
+        this.$router.push(route);
+      },
+    },
+};
+</script>
+
+<style scoped>
+.container-login{
+    max-width: 25rem;
+    height: 25.9375rem;
+    flex-shrink: 0;
+    border-radius: 1.25rem;
+    background: #FFF;
+    box-shadow: -8px 14px 15.7px 4px rgba(0, 0, 0, 0.25);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+h1{
+    color: #000;
+    font-family: "Jost", sans-serif;
+    font-size: 1.5rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    margin-bottom: 1rem;
+}
+
+.form-login {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.input{
+    width: 17.5rem;
+    height: 2.5rem;
+    border-radius: 0.3125rem;
+    border: 1px solid #940D0D;
+    background-color: transparent;
+    margin-top: 0.5rem;
+    margin-bottom: 1rem;
+    align-items: center;
+    justify-content: center;
+}
+
+.label {
+    color: #000;
+    font-family: "Jost", sans-serif;
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    align-self: flex-start;
+}
+
+button {
+    border-radius: 0.3125rem;
+    background: linear-gradient(90deg, #940D0D 0%, #A12A09 100%);
+    color: #FFF;
+    font-family: "Jockey One", sans-serif;
+    font-size: 1.25rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    border: none;
+    padding: 0.5rem 2rem;
+    margin-top: 1rem;
+    cursor: pointer;
+}
+
+button:hover{
+    background: #A12A09;
+}
+.register-link {
+    color: #940D0D;
+    font-family: "Jost", sans-serif;
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    text-decoration: none;
+}
+
+.register-link:hover {
+    text-decoration: underline;
+}
+</style>

@@ -63,6 +63,7 @@ h1{
     margin-bottom: 1rem;
     align-items: center;
     justify-content: center;
+    padding: 0.5rem;
 }
 
 .label {
@@ -105,5 +106,22 @@ button:hover{
 
 .register-link:hover {
     text-decoration: underline;
+}
+
+@media (min-width: 1600px) {
+    .container-login {
+        max-width: 35rem;
+        height: 35rem;
+    }
+
+    .input {
+        width: 25rem;
+        height: 3rem;
+    }
+
+    button {
+        font-size: 1.5rem;
+        padding: 0.75rem 3rem;
+    }
 }
 </style>

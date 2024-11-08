@@ -60,5 +60,22 @@ export default {
   transform: translate(-50%, -50%);
   z-index: 10;
 }
+
+
+@media (min-width: 1600px) {
+  .left-half {
+    width: 50%;
+  }
+
+  .right-half {
+    width: 50%;
+  }
+
+  .login-component {
+    width: 35rem;
+    height: 35rem;
+    left: 75%;
+  }
+}
 </style>
 

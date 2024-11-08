@@ -1,7 +1,7 @@
 <template>
   <section class="left" :class="{ expanded: expanded }">
     <div class="text">
-      <h1>CookBook</h1>
+      <h1 @click="goToPage('/recipelist')" >CookBook</h1>
       <h2>Cook que é bom nada...</h2>
     </div>
   </section>
@@ -16,6 +16,11 @@ export default {
       default: false,
     },
   },
+  methods: {
+      goToPage(route) {
+        this.$router.push(route);
+      },
+    },
 };
 </script>
 
@@ -50,6 +55,7 @@ h1 {
   font-weight: 400;
   margin-bottom: 0px;
   margin-left: 2rem;
+  cursor: pointer;
 }
 
 h2 {

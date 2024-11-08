@@ -1,6 +1,6 @@
 <template>
     <section class="right">
-        <button class="next" @click="goToPage('/recipelist')">
+        <button class="next" @click="goToPage">
           Avançar
         </button>
     </section>
@@ -10,8 +10,8 @@
 export default {
     name: "RightComponent",
     methods: {
-      goToPage(route) {
-        this.$router.push(route);
+      goToPage() {
+        this.$emit('expand');
       },
     },
 };

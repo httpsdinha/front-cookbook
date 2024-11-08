@@ -1,7 +1,7 @@
 <template>
   <section class="left" :class="{ expanded: expanded }">
     <div class="text">
-      <h1 @click="goToPage('/recipelist')" >CookBook</h1>
+      <h1 @click="goToPage('/')" >CookBook</h1>
       <h2>Cook que é bom nada...</h2>
     </div>
   </section>

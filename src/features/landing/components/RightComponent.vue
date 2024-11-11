@@ -19,7 +19,7 @@ export default {
 
 <style scoped>
 .right {
-  background-image: url('@/assets/wallpaper.jpg');
+  background-image: url('@/assets/teste-1.jpeg');
   background-size: cover;
   background-position: center;
   width: 50%;

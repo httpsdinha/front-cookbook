@@ -1,32 +1,45 @@
 <template>
     <section class="container-cadastro">
         <h1>CADASTRAR</h1>
-        <form class="form-cadastro">
-            <label for="name" class="label">Nome</label>
-            <input type="text" class="input" id="name" name="name" required>
-
+        <form class="form-cadastro" @submit.prevent="handleSubmit">
             <label for="email" class="label">E-mail</label>
-            <input type="email" class="input" id="email" name="email" required>
+            <input type="email" class="input" id="email" name="email" v-model="viewModel.model.email" required>
 
             <label for="password" class="label">Senha</label>
-            <input type="password" id="password" class="input" name="password" required>
-            
-            <button type="submit" @click="goToPage('/recipelist')" >CADASTRAR</button>
+            <input type="password" id="password" class="input" name="password" v-model="viewModel.model.password" required>
+
+            <label for="confirmPassword" class="label">Confirmar Senha</label>
+            <input type="password" id="confirmPassword" class="input" name="confirmPassword" v-model="viewModel.model.confirmPassword" required>
+                <span v-if="viewModel.errorMessage" class="error-message">{{ viewModel.errorMessage }}</span>
+            <button type="submit">CADASTRAR</button>
             <a href="/" class="register-link" @click.prevent="goToLandingWithLogin">Entrar</a>
         </form>
     </section>
 </template>
 
 <script>
+
+import CadastroViewModel from '../viewmodels/CadastroViewModels';
+
 export default {
     name: "CadastroComponent",
+    data() {
+        return {
+            viewModel: new CadastroViewModel(),
+        };
+    },
     methods: {
-      goToPage(route) {
-        this.$router.push(route);
-      },
-      goToLandingWithLogin() {
-        this.$router.push({ name: 'LandingPage', query: { login: true } });
-      },
+        goToPage(route) {
+            this.$router.push(route);
+        },
+        goToLandingWithLogin() {
+            this.$router.push({ name: 'LandingPage', query: { login: true } });
+            this.$emit('showLoginComponent');
+            this.$emit('hideCadastroComponent');
+        },
+        handleSubmit() {
+            this.viewModel.handleSubmit(this.goToPage);
+        },
     },
 };
 </script>
@@ -115,6 +128,13 @@ button:hover{
 
 .register-link:hover {
     text-decoration: underline;
+}
+
+.error-message {
+    color: #A12A09;
+    font-family: "Jost", sans-serif;
+    font-size: 0.8rem;
+    font-weight: 700;
 }
 
 @media (min-width: 1600px) {

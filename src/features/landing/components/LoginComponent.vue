@@ -7,7 +7,7 @@
             <label for="password" class="label">Senha</label>
             <input type="password" id="password" class="input" name="password" required>
             <button type="submit" @click="goToPage('/recipelist')" >ENTRAR</button>
-            <a href="/cadastro" class="register-link">Cadastre-se</a>
+            <a href="/cadastro" class="register-link" >Cadastre-se</a>
         </form>
     </section>
 </template>

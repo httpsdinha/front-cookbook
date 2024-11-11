@@ -1,6 +1,6 @@
 import { ref, computed } from 'vue';
 import Recipe from '../models/RecipeAdd';
-import RecipeService from '../services/RecipeService';
+import axiosInstance from '@/plugins/axios';
 
 export function useRecipeAddViewModel() {
   const nome = ref('');
@@ -23,6 +23,20 @@ export function useRecipeAddViewModel() {
     imageName.value = image.value ? `${image.value.name} (${image.value.type})` : '';
   };
 
+  const addRecipe = async (recipeData) => {
+    try {
+      const response = await axiosInstance.post('receita/adicionar', recipeData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+      return response.data;
+    } catch (error) {
+      console.error('Erro ao enviar receita:', error);
+      throw error;
+    }
+  };
+
   const submitForm = async () => {
     if (isFormIncomplete.value) {
       alert('Por favor, preencha todos os campos.');
@@ -39,7 +53,7 @@ export function useRecipeAddViewModel() {
     });
 
     try {
-      await RecipeService.addRecipe(recipe.toFormData());
+      await addRecipe(recipe.toFormData());
       successMessage.value = 'Receita enviada com sucesso!';
       showAlert.value = true;
     } catch (error) {

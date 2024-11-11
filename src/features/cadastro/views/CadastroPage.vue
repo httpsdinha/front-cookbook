@@ -6,7 +6,8 @@
 </template>
 
 <script>
-import { LeftComponent, CadastroComponent } from '@/features/cadastro/services/CadastroService.js';
+import CadastroComponent from "@/features/cadastro/components/CadastroComponent.vue";
+import LeftComponent from '@/features/landing/components/LeftComponent.vue';
 
 export default {
   name: 'CadastroPage',

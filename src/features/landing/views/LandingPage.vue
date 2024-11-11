@@ -7,7 +7,10 @@
 </template>
 
 <script>
-import { LeftComponent, RightComponent, LoginComponent } from '@/features/landing/services/LandingService.js';
+import LeftComponent from '@/features/landing/components/LeftComponent.vue';
+import RightComponent from '@/features/landing/components/RightComponent.vue';
+import LoginComponent from '@/features/landing/components/LoginComponent.vue';
+import LandingPageViewModel from '@/features/landing/viewmodels/LandingPageViewModel.js';
 
 export default {
   name: 'LandingPage',
@@ -17,22 +20,11 @@ export default {
     LoginComponent,
   },
   data() {
-    return {
-      showLogin: false,
-    };
+    return LandingPageViewModel.data();
   },
-  methods: {
-    expandLeft() {
-      this.showLogin = true;
-    },
-    showLoginComponent() {
-      this.showLogin = true;
-    },
-  },
+  methods: LandingPageViewModel.methods,
   created() {
-    if (this.$route.query.login) {
-      this.expandLeft();
-    }
+    LandingPageViewModel.created.call(this);
   },
 };
 </script>
@@ -68,7 +60,6 @@ export default {
   transform: translate(-50%, -50%);
   z-index: 10;
 }
-
 
 @media (min-width: 1600px) {
   .left-half {

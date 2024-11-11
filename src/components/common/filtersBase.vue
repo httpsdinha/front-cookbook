@@ -3,7 +3,7 @@
     <articles class="select-container">
       <img src="@/assets/valor.png" alt="Valor Icon" class="select-icon" />
       <select class="filters" ref="customSelect" @change="onValueChange">
-        <option value="none">Valor</option>
+        <option value="none">Custo</option>
         <option value="Alto">Alto</option>
         <option value="Médio">Médio</option>
         <option value="Baixo">Baixo</option>
@@ -35,7 +35,7 @@ export default {
   name: "FiltersBase",
   methods: {
     onValueChange(event) {
-      console.log('Value changed:', event.target.value); // Log the value
+      console.log('Custo changed:', event.target.value); // Log the value
       this.$emit('valueChange', event.target.value);
     },
     onTimeChange(event) {

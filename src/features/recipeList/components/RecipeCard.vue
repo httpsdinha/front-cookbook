@@ -3,11 +3,11 @@
     <img :src="require(`@/assets/${recipe.image}`)" alt="fotoreceita" class="foto-receita">
     <section class="recipe-details">
       <h2 class="recipe-name">{{ recipe.name }}</h2>
-      <p>{{ recipe.description }} </p>
-      <button-base width="3rem" class="button-ver" @click="goToPage('/recipe')">
+      <p>{{ recipe.custo }} | {{ recipe.tempo }} | {{ recipe.qtd_pessoa }}</p>
+    </section>
+    <button-base width="3rem" class="button-ver" @click="goToPage('/recipe')">
         Ver
       </button-base>
-    </section>
   </article>
 </template>
 
@@ -47,6 +47,7 @@ export default {
 .button-ver {
   position: absolute;
   right: 0;
+  bottom: 0;
   margin: 1rem;
 }
 
@@ -76,7 +77,7 @@ export default {
 }
 
 p {
-  color: #000;
+  color: #A12A09;
   font-family: Jura;
   font-size: 0.9375rem;
   font-style: normal;

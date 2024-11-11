@@ -15,13 +15,14 @@
 
   <main>
     <section class="recipes-container">
-      <recipe-card v-for="recipe in recipes" :key="recipe.id" :recipe="recipe" />
+      <recipe-card v-for="recipe in filteredRecipes" :key="recipe.id" :recipe="recipe" />
     </section>
   </main>
 </template>
 
 <script>
-import { recipes, RecipeCard } from '../services/RecipeService';
+import recipes from '@/test/recipes.json';
+import RecipeCard from '../components/RecipeCard.vue';
 
 export default {
   name: "HomePage",
@@ -31,12 +32,37 @@ export default {
   data() {
     return {
       recipes,
+      filteredRecipes: recipes,
+      filters: {
+        custo: 'none',
+        tempo: 'none',
+        qtd_pessoa: 'none'
+      }
     };
   },
   methods: {
     goToPage(route) {
       this.$router.push(route);
     },
+    handleValueChange(custo) {
+      this.filters.custo = custo;
+      this.applyFilters();
+    },
+    handleTimeChange(tempo) {
+      this.filters.tempo = tempo;
+      this.applyFilters();
+    },
+    handleServeChange(qtd_pessoa) {
+      this.filters.qtd_pessoa = qtd_pessoa;
+      this.applyFilters();
+    },
+    applyFilters() {
+      this.filteredRecipes = this.recipes.filter(recipe => {
+        return (this.filters.custo === 'none' || recipe.custo === this.filters.custo) &&
+               (this.filters.tempo === 'none' || recipe.tempo === this.filters.tempo) &&
+               (this.filters.qtd_pessoa === 'none' || recipe.qtd_pessoa === this.filters.qtd_pessoa);
+      });
+    }
   },
 };
 </script>

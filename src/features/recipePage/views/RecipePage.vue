@@ -13,7 +13,7 @@
                 </ul>
             </section>
             <section class="right_main">
-                <h2>Receita</h2>
+                <h2>{{ recipe.nome }}</h2>
                 <section class="info-container">
                     <article>
                         <img src="@/assets/serve.png" alt="talheres" class="icon_info_prato">
@@ -48,7 +48,7 @@ export default {
         };
     },
     async created() {
-        const recipeId = 304;
+        const recipeId = localStorage.getItem('recipeId'); // Get the recipe ID from local storage
         const data = await fetchRecipeData(recipeId);
         if (data) {
             this.recipe = new Recipe(
@@ -56,11 +56,11 @@ export default {
                 data.modo_prep,
                 data.ingredientes,
                 data.tempo,
-                data.qtd_pessoas, // Use the correctly formatted qtd_pessoas
+                data.qtd_pessoas,
                 data.custo,
                 data.imagem
             );
-            console.debug('Recipe data set:', this.recipe); // Debug log
+            console.debug('Recipe data set:', this.recipe);
         }
     },
     methods: {

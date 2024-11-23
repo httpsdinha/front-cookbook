@@ -21,8 +21,9 @@ export default {
     }
   },
   methods: {
-    goToPage(path) {
-      this.$router.push(path);
+    goToPage() {
+      localStorage.setItem('recipeId', this.recipe.id); // Store the recipe ID in local storage
+      this.$router.push('/recipe'); // Always navigate to /recipe
     }
   }
 }

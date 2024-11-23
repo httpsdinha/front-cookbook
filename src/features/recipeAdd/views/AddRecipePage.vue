@@ -3,7 +3,7 @@
   <main class="main-container">
     <section class="add-form-container">
       <h2>ADICIONAR RECEITA</h2>
-      <RecipeForm />
+      <RecipeForm @submitForm="submitForm" :successMessage="successMessage" />
       <AlertBox v-if="successMessage" :message="successMessage" />
     </section>
   </main>
@@ -16,10 +16,12 @@ export default {
   setup() {
     const {
       successMessage,
+      submitForm,
     } = useRecipeAddViewModel();
 
     return {
       successMessage,
+      submitForm,
     };
   },
 };

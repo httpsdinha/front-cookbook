@@ -4,11 +4,11 @@ import CadastroModel from '../models/CadastroModel';
 export default class CadastroViewModels {
     constructor() {
         this.model = new CadastroModel();
-        this.errorMessage = ''; // Add errorMessage property
+        this.errorMessage = ''; 
     }
 
     async handleSubmit(goToPage) {
-        this.errorMessage = ''; // Reset error message
+        this.errorMessage = ''; 
         if (!this.isValidEmail(this.model.email)) {
             this.errorMessage = "e-mail inválido";
             return;
@@ -27,13 +27,14 @@ export default class CadastroViewModels {
             formData.append('email', this.model.email);
             formData.append('senha', this.model.password);
 
-            await axiosInstance.post('usuario/adicionar', formData, {
+            await axiosInstance.post('/usuario/adicionar', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 },
             });
 
-            goToPage('/recipelist');
+            alert("Cadastro realizado com sucesso!");
+            goToPage('/');
         } catch (error) {
             alert("Aconteceu um erro inesperado")
             console.log('Erro ao cadastrar: ' + error.message);

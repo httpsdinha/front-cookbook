@@ -1,9 +1,9 @@
 <template>
   <article class="recipe">
-    <img :src="require(`@/assets/${recipe.image}`)" alt="fotoreceita" class="foto-receita">
+    <img :src="require(`@/assets/icone.jpg`)" alt="fotoreceita" class="foto-receita">
     <section class="recipe-details">
-      <h2 class="recipe-name">{{ recipe.name }}</h2>
-      <p>{{ recipe.custo }} | {{ recipe.tempo }} | {{ recipe.qtd_pessoa }}</p>
+      <h2 class="recipe-name">{{ recipe.nome }}</h2>
+      <p>{{ recipe.custo }} | {{ recipe.tempo }} | {{ recipe.qtdPessoas }}</p>
     </section>
     <button-base width="3rem" class="button-ver" @click="goToPage('/recipe')">
         Ver

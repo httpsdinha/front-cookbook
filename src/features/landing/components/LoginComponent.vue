@@ -1,24 +1,32 @@
 <template>
     <section class="container-login">
         <h1>ENTRAR</h1>
-        <form class="form-login">
+        <form class="form-login" @submit.prevent="login">
             <label for="email" class="label">E-mail</label>
-            <input type="email" class="input" id="email" name="email" required>
-            <label for="password" class="label">Senha</label>
-            <input type="password" id="password" class="input" name="password" required>
-            <button type="submit" @click="goToPage('/recipelist')" >ENTRAR</button>
-            <a href="/cadastro" class="register-link" >Cadastre-se</a>
+            <input type="email" class="input" id="email" name="email" v-model="email" required>
+            <label for="senha" class="label">Senha</label>
+            <input type="password" id="senha" class="input" name="senha" v-model="senha" required>
+            <button type="submit">ENTRAR</button>
+            <a href="/cadastro" class="register-link">Cadastre-se</a>
         </form>
     </section>
 </template>
 
 <script>
+import LandingPageViewModel from '@/features/landing/viewmodels/LandingPageViewModel.js';
+
 export default {
     name: "LoginComponent",
+    data() {
+        return {
+            email: '',
+            senha: ''
+        };
+    },
     methods: {
-      goToPage(route) {
-        this.$router.push(route);
-      },
+        async login() {
+            await LandingPageViewModel.methods.handleLogin.call(this, this.email, this.senha);
+        },
     },
 };
 </script>

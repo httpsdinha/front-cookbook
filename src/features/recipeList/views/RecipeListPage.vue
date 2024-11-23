@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import recipes from '@/test/recipes.json';
+import { useRecipeListViewModel } from '../viewmodels/RecipeListViewModel';
 import RecipeCard from '../components/RecipeCard.vue';
 
 export default {
@@ -29,41 +29,33 @@ export default {
   components: {
     RecipeCard
   },
-  data() {
+  setup() {
+    const {
+      recipes,
+      filteredRecipes,
+      filters,
+      fetchRecipes,
+      handleValueChange,
+      handleTimeChange,
+      handleServeChange
+    } = useRecipeListViewModel();
+
+    fetchRecipes();
+
     return {
       recipes,
-      filteredRecipes: recipes,
-      filters: {
-        custo: 'none',
-        tempo: 'none',
-        qtd_pessoa: 'none'
-      }
+      filteredRecipes,
+      filters,
+      handleValueChange,
+      handleTimeChange,
+      handleServeChange
     };
   },
   methods: {
     goToPage(route) {
       this.$router.push(route);
-    },
-    handleValueChange(custo) {
-      this.filters.custo = custo;
-      this.applyFilters();
-    },
-    handleTimeChange(tempo) {
-      this.filters.tempo = tempo;
-      this.applyFilters();
-    },
-    handleServeChange(qtd_pessoa) {
-      this.filters.qtd_pessoa = qtd_pessoa;
-      this.applyFilters();
-    },
-    applyFilters() {
-      this.filteredRecipes = this.recipes.filter(recipe => {
-        return (this.filters.custo === 'none' || recipe.custo === this.filters.custo) &&
-               (this.filters.tempo === 'none' || recipe.tempo === this.filters.tempo) &&
-               (this.filters.qtd_pessoa === 'none' || recipe.qtd_pessoa === this.filters.qtd_pessoa);
-      });
     }
-  },
+  }
 };
 </script>
 

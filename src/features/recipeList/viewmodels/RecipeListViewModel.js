@@ -1,0 +1,56 @@
+import { ref } from 'vue';
+import axiosInstance from '@/plugins/axios';
+import Recipe from '../models/Recipe';
+
+export function useRecipeListViewModel() {
+  const recipes = ref([]);
+  const filteredRecipes = ref([]);
+  const filters = ref({
+    custo: 'none',
+    tempo: 'none',
+    qtdPessoas: 'none'
+  });
+
+  const fetchRecipes = async () => {
+    try {
+      const response = await axiosInstance.get('/receita/listar');
+      recipes.value = response.data.map(recipeData => new Recipe(recipeData));
+      filteredRecipes.value = recipes.value;
+    } catch (error) {
+      console.error('Erro ao buscar receitas:', error);
+    }
+  };
+
+  const applyFilters = () => {
+    filteredRecipes.value = recipes.value.filter(recipe => {
+      return (filters.value.custo === 'none' || recipe.custo === filters.value.custo) &&
+             (filters.value.tempo === 'none' || recipe.tempo === filters.value.tempo) &&
+             (filters.value.qtdPessoas === 'none' || recipe.qtdPessoas === filters.value.qtdPessoas);
+    });
+  };
+
+  const handleValueChange = (custo) => {
+    filters.value.custo = custo;
+    applyFilters();
+  };
+
+  const handleTimeChange = (tempo) => {
+    filters.value.tempo = tempo;
+    applyFilters();
+  };
+
+  const handleServeChange = (qtdPessoas) => {
+    filters.value.qtdPessoas = qtdPessoas;
+    applyFilters();
+  };
+
+  return {
+    recipes,
+    filteredRecipes,
+    filters,
+    fetchRecipes,
+    handleValueChange,
+    handleTimeChange,
+    handleServeChange
+  };
+}

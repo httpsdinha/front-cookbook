@@ -1,5 +1,5 @@
 <template>
-  <header-component />
+  <header-component @search="handleSearch" />
   <nav class="filters">
     <div class="filters-left">
       <filters-base
@@ -42,13 +42,20 @@ export default {
 
     fetchRecipes();
 
+    const handleSearch = (searchTerm) => {
+      filteredRecipes.value = recipes.value.filter(recipe =>
+        recipe.nome.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+    };
+
     return {
       recipes,
       filteredRecipes,
       filters,
       handleValueChange,
       handleTimeChange,
-      handleServeChange
+      handleServeChange,
+      handleSearch
     };
   },
   methods: {

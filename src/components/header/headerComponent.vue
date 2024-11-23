@@ -3,7 +3,7 @@
     <h1 @click="goToPage('/')">CookBook</h1>
     <aside class="search responsive-search">
       <section class="input-container">
-        <input type="text" class="search-input" placeholder="Pesquisar" />
+        <input type="text" class="search-input" placeholder="Pesquisar" @input="onSearchInput" />
         <img class="search-icon" src="@/assets/procurar.png" alt="Search Icon" />
       </section>
     </aside>
@@ -32,6 +32,9 @@ export default {
     },
     logout() {
       console.log('User logged out');
+    },
+    onSearchInput(event) {
+      this.$emit('search', event.target.value);
     }
   }
 }

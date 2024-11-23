@@ -44,7 +44,7 @@ export function useRecipeAddViewModel() {
     }
     const recipe = new Recipe({
       nome: nome.value,
-      ingredientes: ingredientes.value,
+      ingredientes: ingredientes.value.split(',').map(ingrediente => ingrediente.trim()),
       modo_prep: modo_prep.value,
       custo: custo.value,
       tempo: tempo.value,

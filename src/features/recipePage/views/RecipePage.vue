@@ -1,59 +1,77 @@
 <template>
     <header-component />
     <main>
-      <button class="edit-icon">
-          <img src="@/assets/editar-documento.png" alt="editar_icon" class="editar_icon">
-      </button>
-  
-      <section class="receita">
-        <section class="left_main">
-          <img src="@/assets/negroni.jpg" alt="negroni" class="imagem_receita">
-          <h2 class="ingredientes">Ingredientes</h2>
-          <ul>
-            <li>1 dose de Campari</li>
-            <li>1 dose de Gin</li>
-            <li>Gelo à vontade</li>
-            <li>1 dose de Vermute tinto</li>
-            <li>1 rodela de laranja com casca e sem semente</li>
-          </ul>
+        <button class="edit-icon">
+            <img src="@/assets/editar-documento.png" alt="editar_icon" class="editar_icon">
+        </button>
+        <section class="receita">
+            <section class="left_main">
+                <img :src="recipe.imagem" :alt="recipe.nome" class="imagem_receita">
+                <h2 class="ingredientes">Ingredientes</h2>
+                <ul>
+                    <li v-for="(ingredient, index) in recipe.ingredientes.split(',')" :key="index">{{ ingredient }}</li>
+                </ul>
+            </section>
+            <section class="right_main">
+                <h2>Receita</h2>
+                <section class="info-container">
+                    <article>
+                        <img src="@/assets/serve.png" alt="talheres" class="icon_info_prato">
+                        <p class="info_prato">{{ recipe.qtd_pessoas }}</p>
+                    </article>
+                    <article>
+                        <img src="@/assets/valor.png" alt="custo" class="icon_info_prato">
+                        <p class="info_prato">{{ recipe.custo }}</p>
+                    </article>
+                    <article>
+                        <img src="@/assets/tempo.png" alt="tempo_preparo" class="icon_info_prato">
+                        <p class="info_prato">{{ recipe.tempo }}</p>
+                    </article>
+                </section>
+                <section class="modo-preparo">
+                    <h2>Modo de Preparo</h2>
+                    <p class="modo_preparo">{{ recipe.modo_prep }}</p>
+                </section>
+            </section>
         </section>
-  
-        <section class="right_main">
-          <h2>Receita</h2>
-          <section class="info-container">
-            <article>
-              <img src="@/assets/serve.png" alt="talheres" class="icon_info_prato">
-              <p class="info_prato">2 pessoas</p>
-            </article>
-            <article>
-              <img src="@/assets/valor.png" alt="custo" class="icon_info_prato">
-              <p class="info_prato">Custo Médio</p>
-            </article>
-            <article>
-              <img src="@/assets/tempo.png" alt="tempo_preparo" class="icon_info_prato">
-              <p class="info_prato">40 min</p>
-            </article>
-          </section>
-          <section class="modo-preparo">
-            <h2>Modo de Preparo</h2>
-            <p class="modo_preparo">Lorem ipsum dolor sit amet, consectetur adipisci elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipisci elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipisci elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipisci elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipisci elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipisci elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua. </p>
-          </section>
-        </section>
-      </section>
     </main>
-  </template>
-  
-  <script>
+</template>
+
+<script>
+import { fetchRecipeData } from '@/features/recipePage/viewmodels/recipePageViewModels';
+import { Recipe } from '@/features/recipePage/models/recipePageModels';
+
 export default {
+    data() {
+        return {
+            recipe: new Recipe('', '', '', '', '', '', '')
+        };
+    },
+    async created() {
+        const recipeId = 304;
+        const data = await fetchRecipeData(recipeId);
+        if (data) {
+            this.recipe = new Recipe(
+                data.nome,
+                data.modo_prep,
+                data.ingredientes,
+                data.tempo,
+                data.qtd_pessoas, // Use the correctly formatted qtd_pessoas
+                data.custo,
+                data.imagem
+            );
+            console.debug('Recipe data set:', this.recipe); // Debug log
+        }
+    },
     methods: {
-      goToPage(path) {
-        this.$router.push(path);
-      }
+        goToPage(path) {
+            this.$router.push(path);
+        }
     }
-  }
+};
 </script>
-  
-  <style scoped>
+
+<style scoped>
   h2 {
     margin: 0px;
     color: #000;
@@ -216,4 +234,4 @@ export default {
     }
   }
   
-  </style>
+</style>

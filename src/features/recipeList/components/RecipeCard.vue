@@ -1,6 +1,6 @@
 <template>
   <article class="recipe">
-    <img :src="require(`@/assets/icone.jpg`)" alt="fotoreceita" class="foto-receita">
+    <img :src="`http://localhost:3000/receita/imagem/${recipe.imagem}`" alt="fotoreceita" class="foto-receita">
     <section class="recipe-details">
       <h2 class="recipe-name">{{ recipe.nome }}</h2>
       <p>{{ recipe.custo }} | {{ recipe.tempo }} | {{ recipe.qtdPessoas }}</p>
@@ -22,8 +22,8 @@ export default {
   },
   methods: {
     goToPage() {
-      localStorage.setItem('recipeId', this.recipe.id); // Store the recipe ID in local storage
-      this.$router.push('/recipe'); // Always navigate to /recipe
+      localStorage.setItem('recipeId', this.recipe.id); 
+      this.$router.push('/recipe'); 
     }
   }
 }

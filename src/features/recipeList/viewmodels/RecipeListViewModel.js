@@ -17,6 +17,7 @@ export function useRecipeListViewModel() {
       const response = await axiosInstance.get('/receita/listar', {
         params: { email: userEmail }
       });
+      console.log('Data from backend:', response.data); // Print data from backend
       recipes.value = response.data.map(recipeData => new Recipe(recipeData));
       filteredRecipes.value = recipes.value;
     } catch (error) {

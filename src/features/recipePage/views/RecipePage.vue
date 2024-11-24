@@ -6,7 +6,7 @@
         </button>
         <section class="receita">
             <section class="left_main">
-                <img :src="recipe.imagem" :alt="recipe.nome" class="imagem_receita">
+                <img :src="`http://localhost:3000/receita/imagem/${recipe.imagem}`" :alt="recipe.nome" class="imagem_receita">
                 <h2 class="ingredientes">Ingredientes</h2>
                 <ul>
                     <li v-for="(ingredient, index) in recipe.ingredientes.split(',')" :key="index">{{ ingredient }}</li>
@@ -38,7 +38,6 @@
 </template>
 
 <script>
-import { fetchRecipeData } from '@/features/recipePage/viewmodels/recipePageViewModels';
 import { Recipe } from '@/features/recipePage/models/recipePageModels';
 
 export default {
@@ -48,26 +47,29 @@ export default {
         };
     },
     async created() {
-        const recipeId = localStorage.getItem('recipeId'); // Get the recipe ID from local storage
-        const data = await fetchRecipeData(recipeId);
-        if (data) {
-            this.recipe = new Recipe(
-                data.nome,
-                data.modo_prep,
-                data.ingredientes,
-                data.tempo,
-                data.qtd_pessoas,
-                data.custo,
-                data.imagem
-            );
-        }
+        await this.fetchRecipeData();
     },
     methods: {
+        async fetchRecipeData() {
+            const recipeId = localStorage.getItem('recipeId'); // Get the recipe ID from local storage
+            const data = await Recipe.getRecipe(recipeId);
+            if (data) {
+                this.recipe = new Recipe(
+                    data.nome,
+                    data.modo_prep,
+                    data.ingredientes,
+                    data.tempo,
+                    data.qtdPessoas, // Ensure this matches the API response
+                    data.custo,
+                    data.imagem
+                );
+            }
+        },
         goToPage(path) {
             this.$router.push(path);
         },
         goToEditPage() {
-            this.$router.push('/edit');
+            this.$router.push({ path: '/edit', query: { recipe: JSON.stringify(this.recipe) } });
         }
     }
 };

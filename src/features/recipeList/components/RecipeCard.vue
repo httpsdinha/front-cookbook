@@ -3,15 +3,17 @@
     <img :src="`http://localhost:3000/receita/imagem/${recipe.imagem}`" alt="fotoreceita" class="foto-receita">
     <section class="recipe-details">
       <h2 class="recipe-name">{{ recipe.nome }}</h2>
-      <p>{{ recipe.custo }} | {{ recipe.tempo }} | {{ recipe.qtdPessoas }}</p>
+      <p>{{ recipe.custo }} | {{ recipe.tempo }} | {{ recipe.qtdPessoas > 6 ? '+6' : recipe.qtdPessoas }}</p>
     </section>
-    <button-base width="3rem" class="button-ver" @click="goToPage('/recipe')">
+    <button-base width="3rem" class="button-ver" @click="getRecipeData">
         Ver
       </button-base>
   </article>
 </template>
 
 <script>
+import { Recipe } from '@/features/recipePage/models/recipePageModels.js';
+
 export default {
   name: 'RecipeCard',
   props: {
@@ -24,6 +26,15 @@ export default {
     goToPage() {
       localStorage.setItem('recipeId', this.recipe.id); 
       this.$router.push('/recipe'); 
+    },
+    async getRecipeData() {
+      try {
+        const recipeData = await Recipe.getRecipe(this.recipe.id);
+        console.log(recipeData);
+        this.goToPage();
+      } catch (error) {
+        console.error('Error getting recipe data:', error);
+      }
     }
   }
 }

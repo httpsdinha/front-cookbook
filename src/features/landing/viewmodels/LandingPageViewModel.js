@@ -38,6 +38,12 @@ export default {
         alert('An error occurred during login');
       }
     },
+    printLoginData() {
+      console.log('Login data:', {
+        showLogin: this.showLogin,
+        userEmail: localStorage.getItem('userEmail')
+      });
+    }
   },
   created() {
     if (this.$route.query.login) {

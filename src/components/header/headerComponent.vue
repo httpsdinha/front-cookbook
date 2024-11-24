@@ -31,7 +31,7 @@ export default {
       this.showModal = !this.showModal;
     },
     logout() {
-      console.log('User logged out');
+      this.$router.push('/');
     },
     onSearchInput(event) {
       this.$emit('search', event.target.value);

@@ -1,3 +1,4 @@
+/* eslint-disable */
 <template>
   <header-component />
   <main>
@@ -6,7 +7,7 @@
       </button>
       <section class="receita">
           <section class="left_main">
-              <img :src="recipe.imagem" :alt="recipe.nome" class="imagem_receita">
+              <img :src="`http://localhost:3000/receita/imagem/${recipe.imagem}`" :alt="recipe.nome" class="imagem_receita">
               <h2 class="ingredientes">Ingredientes</h2>
               <ul>
                   <li v-for="(ingredient, index) in ingredients" :key="index" class="ingredient-item">
@@ -58,7 +59,6 @@
 </template>
 
 <script>
-import { fetchRecipeData } from '@/features/recipePage/viewmodels/recipePageViewModels';
 import { Recipe } from '@/features/recipePage/models/recipePageModels';
 import recipeEditPageViewModels from '@/features/recipePage/viewmodels/recipeEditPageViewModels';
 
@@ -70,9 +70,9 @@ export default {
       };
   },
   async created() {
-      const recipeId = localStorage.getItem('recipeId'); 
-      const data = await fetchRecipeData(recipeId);
-      if (data) {
+      const recipeData = this.$route.query.recipe;
+      if (recipeData) {
+          const data = JSON.parse(recipeData);
           this.recipe = new Recipe(
               data.nome,
               data.modo_prep,

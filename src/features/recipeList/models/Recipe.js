@@ -6,7 +6,7 @@ export default class Recipe {
     this.modo_prep = modo_prep;
     this.ingredientes = ingredientes;
     this.tempo = tempo;
-    this.qtdPessoas = qtdPessoas;
+    this.qtdPessoas = qtdPessoas; // Ensure this matches the template
     this.custo = custo;
     this.imagem = imagem;
   }

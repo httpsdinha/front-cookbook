@@ -5,4 +5,13 @@ async function fetchRecipeData(recipeId) {
     // ...existing code...
 }
 
-export { fetchRecipeData };
+async function printRecipeData(recipeId) {
+    try {
+        const response = await fetchRecipeData(recipeId);
+        console.log(response.data);
+    } catch (error) {
+        console.error('Error fetching recipe data:', error);
+    }
+}
+
+export { fetchRecipeData, printRecipeData };

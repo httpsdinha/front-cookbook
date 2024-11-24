@@ -60,7 +60,7 @@
 <script>
 import { fetchRecipeData } from '@/features/recipePage/viewmodels/recipePageViewModels';
 import { Recipe } from '@/features/recipePage/models/recipePageModels';
-import axiosInstance from '@/plugins/axios';
+import recipeEditPageViewModels from '@/features/recipePage/viewmodels/recipeEditPageViewModels';
 
 export default {
   data() {
@@ -70,7 +70,7 @@ export default {
       };
   },
   async created() {
-      const recipeId = localStorage.getItem('recipeId'); // Get the recipe ID from local storage
+      const recipeId = localStorage.getItem('recipeId'); 
       const data = await fetchRecipeData(recipeId);
       if (data) {
           this.recipe = new Recipe(
@@ -83,55 +83,27 @@ export default {
               data.imagem
           );
           this.ingredients = data.ingredientes.split(',');
-          console.debug('Recipe data set:', this.recipe);
       }
   },
   methods: {
       addIngredient() {
-          this.ingredients.push('');
+          recipeEditPageViewModels.addIngredient(this.ingredients);
       },
       removeIngredient(index) {
-          this.ingredients.splice(index, 1);
+          recipeEditPageViewModels.removeIngredient(this.ingredients, index);
       },
       async saveRecipe() {
-          this.recipe.ingredientes = this.ingredients.join(',');
-          const formData = new FormData();
-          formData.append('id', localStorage.getItem('recipeId'));
-          formData.append('nome', this.recipe.nome);
-          formData.append('modo_prep', this.recipe.modo_prep);
-          formData.append('ingredientes', this.recipe.ingredientes);
-          formData.append('tempo', this.recipe.tempo);
-          formData.append('qtd_pessoas', this.recipe.qtd_pessoas);
-          formData.append('custo', this.recipe.custo);
-          if (this.recipe.imagem) {
-              formData.append('imagem', this.recipe.imagem);
-          }
-
-          console.log('FormData being sent:', Object.fromEntries(formData.entries())); // Add this line
-
-          try {
-              await axiosInstance.put('/receita/atualizar', formData, {
-                  headers: {
-                      'Content-Type': 'multipart/form-data'
-                  }
-              });
+          const success = await recipeEditPageViewModels.saveRecipe(this.recipe, this.ingredients);
+          if (success) {
               this.$router.push('/recipe');
-          } catch (error) {
-              console.error('Erro ao atualizar receita:', error);
           }
       },
-      confirmDelete() {
-          if (confirm('Tem certeza que deseja deletar esta receita?')) {
-              this.deleteRecipe();
-          }
-      },
-      async deleteRecipe() {
-          const recipeId = localStorage.getItem('recipeId');
-          try {
-              await axiosInstance.delete(`/receita/deletar/${recipeId}`);
-              this.$router.push('/recipelist');
-          } catch (error) {
-              console.error('Erro ao deletar receita:', error);
+      async confirmDelete() {
+          if (recipeEditPageViewModels.confirmDelete()) {
+              const success = await recipeEditPageViewModels.deleteRecipe();
+              if (success) {
+                  this.$router.push('/recipelist');
+              }
           }
       }
   }

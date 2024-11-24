@@ -60,7 +60,6 @@ export default {
                 data.custo,
                 data.imagem
             );
-            console.debug('Recipe data set:', this.recipe);
         }
     },
     methods: {

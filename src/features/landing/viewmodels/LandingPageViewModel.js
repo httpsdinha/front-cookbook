@@ -18,7 +18,6 @@ export default {
     },
     async handleLogin(email, senha) {
       try {
-        console.log('Sending login request with:', { email, senha });
         const response = await axiosInstance.post('/usuario/login', {
           email: email,
           senha: senha
@@ -27,8 +26,6 @@ export default {
             'Content-Type': 'application/json',
           },
         });
-
-        console.log('Login response:', response);
 
         if (response.status === 200 && response.data === 'Login válido') {
           this.$router.push('/recipelist');

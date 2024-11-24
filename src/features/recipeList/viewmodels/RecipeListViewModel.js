@@ -13,7 +13,10 @@ export function useRecipeListViewModel() {
 
   const fetchRecipes = async () => {
     try {
-      const response = await axiosInstance.get('/receita/listar');
+      const userEmail = localStorage.getItem('userEmail'); // Retrieve user's email
+      const response = await axiosInstance.get('/receita/listar', {
+        params: { email: userEmail }
+      });
       recipes.value = response.data.map(recipeData => new Recipe(recipeData));
       filteredRecipes.value = recipes.value;
     } catch (error) {

@@ -1,5 +1,5 @@
 <template>
-  <form @submit.prevent="submitForm">
+  <form @submit.prevent="submitForm" enctype="multipart/form-data">
     <nav class="filters-container">
       <filters-base @valueChange="custo = $event" @timeChange="tempo = $event" @serveChange="qtd_pessoas = $event" />
     </nav>
@@ -41,6 +41,12 @@ export default {
       closeAlert, 
     } = useRecipeAddViewModel();
 
+    const enhancedHandleImageUpload = () => {
+      const file = document.querySelector('#image-upload').files[0];
+      handleImageUpload({ target: { files: [file] } });
+      console.log('Imagem selecionada:', file);
+    };
+
     return {
       nome,
       ingredientes,
@@ -50,7 +56,7 @@ export default {
       qtd_pessoas,
       imageName,
       isFormIncomplete,
-      handleImageUpload,
+      handleImageUpload: enhancedHandleImageUpload,
       submitForm,
       showAlert,
       closeAlert,

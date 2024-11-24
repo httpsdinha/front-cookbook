@@ -1,7 +1,7 @@
 <template>
     <header-component />
     <main>
-        <button class="edit-icon">
+        <button class="edit-icon" @click="goToEditPage">
             <img src="@/assets/editar-documento.png" alt="editar_icon" class="editar_icon">
         </button>
         <section class="receita">
@@ -66,6 +66,9 @@ export default {
     methods: {
         goToPage(path) {
             this.$router.push(path);
+        },
+        goToEditPage() {
+            this.$router.push('/edit');
         }
     }
 };
@@ -232,6 +235,10 @@ export default {
       width: 0.875rem;
       height: 0.875rem;
     }
+  }
+
+  .edit-icon:hover .editar_icon {
+    filter: brightness(0.8);
   }
   
 </style>

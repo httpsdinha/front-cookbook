@@ -2,7 +2,7 @@
     <header-component />
     <main>
       <button class="edit-icon">
-          <img src="@/assets/editar-documento.png" alt="editar_icon" class="editar_icon">
+          <img src="@/assets/editar-documento.png" alt="editar_icon" class="editar_icon" @click="goToPage('/edit')">
       </button>
   
       <section class="receita">

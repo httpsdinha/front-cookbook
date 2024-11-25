@@ -31,6 +31,7 @@ export default {
       this.showModal = !this.showModal;
     },
     logout() {
+      localStorage.removeItem('userEmail');
       this.$router.push('/');
     },
     onSearchInput(event) {

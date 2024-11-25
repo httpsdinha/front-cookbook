@@ -35,15 +35,12 @@ export default {
   name: "FiltersBase",
   methods: {
     onValueChange(event) {
-      console.log('Custo changed:', event.target.value); // Log the value
       this.$emit('valueChange', event.target.value);
     },
     onTimeChange(event) {
-      console.log('Time changed:', event.target.value); // Log the value
       this.$emit('timeChange', event.target.value);
     },
     onServeChange(event) {
-      console.log('Serve changed:', event.target.value);
       this.$emit('serveChange', event.target.value);
     },
   },
